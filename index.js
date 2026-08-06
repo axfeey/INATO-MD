@@ -173,7 +173,8 @@ async function connectToWhatsApp() {
                     const isMalayalam = /[\u0D00-\u0D7F]/.test(q);
                     const lang = isMalayalam ? 'ml' : 'en';
                     const audioUrl = googleTTS.getAudioUrl(q, { lang: lang, slow: false, host: 'https://translate.google.com' });
-                    await sock.sendMessage(from, { audio: { url: audioUrl }, mimetype: 'audio/mp4', ptt: true }, { quoted: msg });
+                    // ptt: false നൽകിയതിനാൽ ഇനി വോയ്‌സ് നോട്ടിന് പകരം MP3 ഫയലായി അയക്കും
+                    await sock.sendMessage(from, { audio: { url: audioUrl }, mimetype: 'audio/mp4', ptt: false }, { quoted: msg });
                 } catch (e) {
                     await sock.sendMessage(from, { text: '│ ❌ വോയ്‌സ് ഉണ്ടാക്കാൻ പറ്റിയില്ല!' });
                 }

@@ -122,3 +122,43 @@
 2026-08-06T19:36:03: PM2 warn: [pidusage] We couldn't find uptime from /proc/uptime, using os.uptime() value
 2026-08-06T19:36:33: PM2 warn: [pidusage] We couldn't find uptime from /proc/uptime, using os.uptime() value
 2026-08-06T19:37:03: PM2 warn: [pidusage] We couldn't find uptime from /proc/uptime, using os.uptime() value
+2026-08-06T20:01:20: PM2 log: ===============================================================================
+2026-08-06T20:01:20: PM2 log: --- New PM2 Daemon started ----------------------------------------------------
+2026-08-06T20:01:20: PM2 log: Time                 : Thu Aug 06 2026 20:01:20 GMT+0530 (India Standard Time)
+2026-08-06T20:01:20: PM2 log: PM2 version          : 7.0.3
+2026-08-06T20:01:20: PM2 log: Node.js version      : 26.3.1
+2026-08-06T20:01:20: PM2 log: Current arch         : arm64
+2026-08-06T20:01:20: PM2 log: PM2 home             : /data/data/com.termux/files/home/.pm2
+2026-08-06T20:01:20: PM2 log: PM2 PID file         : /data/data/com.termux/files/home/.pm2/pm2.pid
+2026-08-06T20:01:20: PM2 log: RPC socket file      : /data/data/com.termux/files/home/.pm2/rpc.sock
+2026-08-06T20:01:20: PM2 log: BUS socket file      : /data/data/com.termux/files/home/.pm2/pub.sock
+2026-08-06T20:01:20: PM2 log: Application log path : /data/data/com.termux/files/home/.pm2/logs
+2026-08-06T20:01:20: PM2 log: Worker Interval      : 30000
+2026-08-06T20:01:20: PM2 log: Process dump file    : /data/data/com.termux/files/home/.pm2/dump.pm2
+2026-08-06T20:01:20: PM2 log: Concurrent actions   : 2
+2026-08-06T20:01:20: PM2 log: SIGTERM timeout      : 1600
+2026-08-06T20:01:20: PM2 log: Runtime Binary       : /data/data/com.termux/files/usr/bin/node
+2026-08-06T20:01:20: PM2 log: ===============================================================================
+2026-08-06T20:01:20: PM2 log: App [INATO-MD:0] starting in -fork mode-
+2026-08-06T20:01:20: PM2 log: App [INATO-MD:0] online
+2026-08-06T20:01:21: PM2 warn: [pidusage] We couldn't find uptime from /proc/uptime, using os.uptime() value
+2026-08-06T20:01:44: PM2 warn: [pidusage] We couldn't find uptime from /proc/uptime, using os.uptime() value
+2026-08-06T20:01:51: PM2 warn: [pidusage] We couldn't find uptime from /proc/uptime, using os.uptime() value
+2026-08-06T20:02:21: PM2 warn: [pidusage] We couldn't find uptime from /proc/uptime, using os.uptime() value
+2026-08-06T20:02:51: PM2 warn: [pidusage] We couldn't find uptime from /proc/uptime, using os.uptime() value
+2026-08-06T20:03:21: PM2 warn: [pidusage] We couldn't find uptime from /proc/uptime, using os.uptime() value
+2026-08-06T20:03:51: PM2 warn: [pidusage] We couldn't find uptime from /proc/uptime, using os.uptime() value
+2026-08-06T20:04:21: PM2 warn: [pidusage] We couldn't find uptime from /proc/uptime, using os.uptime() value
+2026-08-06T20:04:51: PM2 warn: [pidusage] We couldn't find uptime from /proc/uptime, using os.uptime() value
+2026-08-06T20:05:21: PM2 warn: [pidusage] We couldn't find uptime from /proc/uptime, using os.uptime() value
+2026-08-06T20:05:51: PM2 warn: [pidusage] We couldn't find uptime from /proc/uptime, using os.uptime() value
+2026-08-06T20:06:21: PM2 warn: [pidusage] We couldn't find uptime from /proc/uptime, using os.uptime() value
+2026-08-06T20:06:51: PM2 warn: [pidusage] We couldn't find uptime from /proc/uptime, using os.uptime() value
+2026-08-06T20:07:21: PM2 warn: [pidusage] We couldn't find uptime from /proc/uptime, using os.uptime() value
+2026-08-06T20:07:34: PM2 warn: [pidusage] We couldn't find uptime from /proc/uptime, using os.uptime() value
+2026-08-06T20:07:34: PM2 log: Stopping app:INATO-MD id:0
+2026-08-06T20:07:34: PM2 log: App [INATO-MD:0] exited with code [0] via signal [SIGINT]
+2026-08-06T20:07:34: PM2 log: pid=5072 msg=process tree killed (1 pids)
+2026-08-06T20:07:58: PM2 log: App [INATO-MD:0] starting in -fork mode-
+2026-08-06T20:07:59: PM2 log: App [INATO-MD:0] online
+2026-08-06T20:07:59: PM2 warn: [pidusage] We couldn't find uptime from /proc/uptime, using os.uptime() value

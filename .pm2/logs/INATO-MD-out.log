@@ -2919,3 +2919,148 @@ Closing session: SessionEntry {
 {"level":30,"time":"2026-08-06T14:06:33.777Z","pid":14117,"hostname":"localhost","class":"baileys","count":5,"retryCount":0,"msg":"uploading pre-keys"}
 {"level":30,"time":"2026-08-06T14:06:34.339Z","pid":14117,"hostname":"localhost","class":"baileys","count":5,"msg":"uploaded pre-keys successfully"}
 {"level":30,"time":"2026-08-06T14:06:49.542Z","pid":14117,"hostname":"localhost","class":"baileys","jid":"168771058667621@lid","addr":"168771058667621_1.0","msg":"identity key changed or new contact, session will be re-established"}
+{"level":30,"time":"2026-08-06T14:31:25.016Z","pid":5072,"hostname":"localhost","class":"baileys","browser":["Mac OS","Chrome","14.4.1"],"helloMsg":{"clientHello":{"ephemeral":"/zhx6g3Q/uVoiNzbsIY9H7WGt1sRhgdZKdpE1thVQWo="}},"msg":"connected to WA"}
+{"level":30,"time":"2026-08-06T14:31:25.528Z","pid":5072,"hostname":"localhost","class":"baileys","node":{"username":"916282144167","passive":true,"userAgent":{"platform":"WEB","appVersion":{"primary":2,"secondary":3000,"tertiary":1043857760},"mcc":"000","mnc":"000","osVersion":"0.1","device":"Desktop","osBuildNumber":"0.1","releaseChannel":"RELEASE","localeLanguageIso6391":"en","localeCountryIso31661Alpha2":"US"},"webInfo":{"webSubPlatform":"WEB_BROWSER"},"connectType":"WIFI_UNKNOWN","connectReason":"USER_ACTIVATED","device":78,"pull":true,"lidDbMigrated":false},"msg":"logging in..."}
+{"level":30,"time":"2026-08-06T14:31:26.260Z","pid":5072,"hostname":"localhost","class":"baileys","msg":"359 pre-keys found on server"}
+{"level":30,"time":"2026-08-06T14:31:26.261Z","pid":5072,"hostname":"localhost","class":"baileys","msg":"Current prekey ID: 812, exists in storage: true"}
+{"level":30,"time":"2026-08-06T14:31:26.261Z","pid":5072,"hostname":"localhost","class":"baileys","msg":"PreKey validation passed - Server: 359, Current prekey 812 exists"}
+{"level":30,"time":"2026-08-06T14:31:26.689Z","pid":5072,"hostname":"localhost","class":"baileys","msg":"offline preview received"}
+{"level":30,"time":"2026-08-06T14:31:27.027Z","pid":5072,"hostname":"localhost","class":"baileys","msg":"handled 21 offline messages/notifications"}
+INATO-MD Connected Successfully!
+{"level":30,"time":"2026-08-06T14:31:27.030Z","pid":5072,"hostname":"localhost","class":"baileys","msg":"Connection is now AwaitingInitialSync, buffering events"}
+{"level":30,"time":"2026-08-06T14:31:27.030Z","pid":5072,"hostname":"localhost","class":"baileys","msg":"Reconnection with existing sync data, skipping history sync wait. Transitioning to Online."}
+{"level":30,"time":"2026-08-06T14:31:27.037Z","pid":5072,"hostname":"localhost","class":"baileys","msg":"opened connection to WA"}
+{"level":30,"time":"2026-08-06T14:31:27.146Z","pid":5072,"hostname":"localhost","class":"baileys","myPN":"916282144167:78@s.whatsapp.net","myLID":"238968188735661:78@lid","msg":"Own LID session created successfully"}
+Closing session: SessionEntry {
+  _chains: {
+    'BWNQ9xtx+tYoIYgoeX64YrTTxeE42UF91NWT4SJIDy57': { chainKey: [Object], chainType: 1, messageKeys: {} }
+  },
+  registrationId: 992756417,
+  currentRatchet: {
+    ephemeralKeyPair: {
+      pubKey: <Buffer 05 63 50 f7 1b 71 fa d6 28 21 88 28 79 7e b8 62 b4 d3 c5 e1 38 d9 41 7d d4 d5 93 e1 22 48 0f 2e 7b>,
+      privKey: <Buffer 28 83 0c 24 37 1e 76 e7 42 ba ea b0 5e 0b de 9c 87 0a 5d c5 ef 72 c5 c8 a2 2c 99 02 28 c6 87 5d>
+    },
+    lastRemoteEphemeralKey: <Buffer 05 50 11 d6 a2 c2 58 25 11 32 b5 c4 8c a0 bb f6 33 a8 73 87 e7 e1 23 51 59 ff e8 fe e4 29 a6 d9 10>,
+    previousCounter: 0,
+    rootKey: <Buffer d5 a4 c8 0a ef 05 e9 62 6c 96 75 bc 6e 69 2c 78 22 34 b8 15 bf 97 ba 7c ab 76 fa ef 0c 7f de 98>
+  },
+  indexInfo: {
+    baseKey: <Buffer 05 6b 1f b3 95 f2 95 bd 40 61 45 73 c1 a3 d5 2c d5 c0 bb 3c 1a 34 8b e8 07 b5 24 5c 16 ba 95 42 65>,
+    baseKeyType: 1,
+    closed: -1,
+    used: 1786026633021,
+    created: 1786026633021,
+    remoteIdentityKey: <Buffer 05 f7 ea 99 ee 79 81 5a 58 c2 5f c8 98 5d 4a 2e e2 41 7c 3e 35 5a 07 56 88 d3 99 11 6c dd 96 88 28>
+  },
+  pendingPreKey: {
+    signedKeyId: 10595806,
+    baseKey: <Buffer 05 6b 1f b3 95 f2 95 bd 40 61 45 73 c1 a3 d5 2c d5 c0 bb 3c 1a 34 8b e8 07 b5 24 5c 16 ba 95 42 65>,
+    preKeyId: 14292961
+  }
+}
+Closing session: SessionEntry {
+  _chains: {
+    'BfOIA8+6oVDsFJ1PhlRRKOrQ79BNqkjOeOY9UUrQ18Ys': { chainKey: [Object], chainType: 1, messageKeys: {} }
+  },
+  registrationId: 992756417,
+  currentRatchet: {
+    ephemeralKeyPair: {
+      pubKey: <Buffer 05 f3 88 03 cf ba a1 50 ec 14 9d 4f 86 54 51 28 ea d0 ef d0 4d aa 48 ce 78 e6 3d 51 4a d0 d7 c6 2c>,
+      privKey: <Buffer 08 90 5b a3 46 91 8d a8 5a 57 a0 a3 b1 9c 8a db 8a cb ba ca 9f cb c1 84 ef 9f 78 a3 70 ad 65 55>
+    },
+    lastRemoteEphemeralKey: <Buffer 05 50 11 d6 a2 c2 58 25 11 32 b5 c4 8c a0 bb f6 33 a8 73 87 e7 e1 23 51 59 ff e8 fe e4 29 a6 d9 10>,
+    previousCounter: 0,
+    rootKey: <Buffer 56 42 ca 8c 31 77 15 d1 d5 79 00 4f cb 31 c9 73 d8 97 6e 57 ee ec ae ca bc 86 c2 46 23 02 1b 11>
+  },
+  indexInfo: {
+    baseKey: <Buffer 05 55 86 97 14 cc 4d 3a 74 f9 e5 d6 f6 3b 04 11 f3 95 e4 64 98 b4 a2 f1 62 5d 25 33 35 a8 bf 66 20>,
+    baseKeyType: 1,
+    closed: -1,
+    used: 1786026687163,
+    created: 1786026687163,
+    remoteIdentityKey: <Buffer 05 f7 ea 99 ee 79 81 5a 58 c2 5f c8 98 5d 4a 2e e2 41 7c 3e 35 5a 07 56 88 d3 99 11 6c dd 96 88 28>
+  },
+  pendingPreKey: {
+    signedKeyId: 10595806,
+    baseKey: <Buffer 05 55 86 97 14 cc 4d 3a 74 f9 e5 d6 f6 3b 04 11 f3 95 e4 64 98 b4 a2 f1 62 5d 25 33 35 a8 bf 66 20>,
+    preKeyId: 14292888
+  }
+}
+{"level":30,"time":"2026-08-06T14:31:27.852Z","pid":5072,"hostname":"localhost","class":"baileys","jid":"185379646865511@lid","addr":"185379646865511_1.0","msg":"identity key changed or new contact, session will be re-established"}
+{"level":30,"time":"2026-08-06T14:31:27.959Z","pid":5072,"hostname":"localhost","class":"baileys","jid":"19271753199687@lid","addr":"19271753199687_1.0","msg":"identity key changed or new contact, session will be re-established"}
+{"level":40,"time":"2026-08-06T14:32:11.965Z","pid":5072,"hostname":"localhost","class":"baileys","msgId":"3EB03EA203268A70B0580F","trace":"Error: No image processing library available\n    at extractImageThumb (/data/data/com.termux/files/home/node_modules/@whiskeysockets/baileys/src/Utils/messages-media.ts:169:9)\n    at process.processTicksAndRejections (node:internal/process/task_queues:104:5)\n    at async generateThumbnail (/data/data/com.termux/files/home/node_modules/@whiskeysockets/baileys/src/Utils/messages-media.ts:338:32)\n    at async <anonymous> (/data/data/com.termux/files/home/node_modules/@whiskeysockets/baileys/src/Utils/messages.ts:254:53)\n    at async Promise.all (index 1)\n    at async prepareWAMessageMedia (/data/data/com.termux/files/home/node_modules/@whiskeysockets/baileys/src/Utils/messages.ts:241:37)\n    at async generateWAMessageContent (/data/data/com.termux/files/home/node_modules/@whiskeysockets/baileys/src/Utils/messages.ts:611:7)\n    at async generateWAMessage (/data/data/com.termux/files/home/node_modules/@whiskeysockets/baileys/src/Utils/messages.ts:770:43)\n    at async Object.sendMessage (/data/data/com.termux/files/home/node_modules/@whiskeysockets/baileys/src/Socket/messages-send.ts:1345:21)\n    at async EventEmitter.<anonymous> (/data/data/com.termux/files/home/index.js:124:17)","msg":"failed to obtain extra info"}
+{"level":30,"time":"2026-08-06T14:32:23.693Z","pid":5072,"hostname":"localhost","class":"baileys","jid":"99737780891825@lid","addr":"99737780891825_1.0","msg":"identity key changed or new contact, session will be re-established"}
+{"level":30,"time":"2026-08-06T14:32:33.060Z","pid":5072,"hostname":"localhost","class":"baileys","jid":"55375097278701@lid","msg":"identity changed"}
+{"level":30,"time":"2026-08-06T14:32:43.829Z","pid":5072,"hostname":"localhost","class":"baileys","jid":"95116781973512@lid","addr":"95116781973512_1.0","msg":"identity key changed or new contact, session will be re-established"}
+{"level":30,"time":"2026-08-06T14:32:48.904Z","pid":5072,"hostname":"localhost","class":"baileys","jid":"174887142453422@lid","msg":"identity changed"}
+{"level":50,"time":"2026-08-06T14:32:51.513Z","pid":5072,"hostname":"localhost","class":"baileys","error":{},"msg":"transaction failed, rolling back"}
+{"level":50,"time":"2026-08-06T14:32:51.517Z","pid":5072,"hostname":"localhost","class":"baileys","key":{"remoteJid":"120363427362546474@g.us","fromMe":false,"id":"AC855C795D8DA7CD02BF00BE6958FE2B","participant":"41927906992281@lid","participantAlt":"919385722308@s.whatsapp.net","addressingMode":"lid"},"err":{"type":"Error","message":"No session found to decrypt message","stack":"Error: No session found to decrypt message\n    at GroupCipher.decrypt (/data/data/com.termux/files/home/node_modules/@whiskeysockets/baileys/src/Signal/Group/group_cipher.ts:58:10)\n    at async <anonymous> (/data/data/com.termux/files/home/node_modules/@whiskeysockets/baileys/src/Utils/auth-utils.ts:327:22)"},"messageType":"skmsg","sender":"120363427362546474@g.us","author":"41927906992281@lid","isSessionRecordError":false,"msg":"failed to decrypt message"}
+{"level":30,"time":"2026-08-06T14:32:51.544Z","pid":5072,"hostname":"localhost","class":"baileys","msgAttrs":{"from":"120363427362546474@g.us","type":"text","id":"AC855C795D8DA7CD02BF00BE6958FE2B","participant":"41927906992281@lid","sts":"1786026773096300","notify":"😁🥰🫂","addressing_mode":"lid","expiration":"7776000","participant_pn":"919385722308@s.whatsapp.net","t":"1786026772"},"retryCount":1,"msg":"sent retry receipt"}
+{"level":30,"time":"2026-08-06T14:33:01.566Z","pid":5072,"hostname":"localhost","class":"baileys","jid":"82317661974697@lid","addr":"82317661974697_1.0","msg":"identity key changed or new contact, session will be re-established"}
+{"level":30,"time":"2026-08-06T14:33:39.497Z","pid":5072,"hostname":"localhost","class":"baileys","jid":"136013376700593@lid","msg":"identity changed"}
+{"level":30,"time":"2026-08-06T14:34:22.538Z","pid":5072,"hostname":"localhost","class":"baileys","jid":"192166097903839@lid","addr":"192166097903839_1.0","msg":"identity key changed or new contact, session will be re-established"}
+{"level":30,"time":"2026-08-06T14:34:25.071Z","pid":5072,"hostname":"localhost","class":"baileys","jid":"41927906992281@lid","addr":"41927906992281_1.0","msg":"identity key changed or new contact, session will be re-established"}
+{"level":30,"time":"2026-08-06T14:34:30.974Z","pid":5072,"hostname":"localhost","class":"baileys","jid":"152316737019996@lid","addr":"152316737019996_1.0","msg":"identity key changed or new contact, session will be re-established"}
+{"level":40,"time":"2026-08-06T14:34:44.589Z","pid":5072,"hostname":"localhost","class":"baileys","msgId":"3EB0BE524557C1CBD6A349","trace":"Error: No image processing library available\n    at extractImageThumb (/data/data/com.termux/files/home/node_modules/@whiskeysockets/baileys/src/Utils/messages-media.ts:169:9)\n    at process.processTicksAndRejections (node:internal/process/task_queues:104:5)\n    at async generateThumbnail (/data/data/com.termux/files/home/node_modules/@whiskeysockets/baileys/src/Utils/messages-media.ts:338:32)\n    at async <anonymous> (/data/data/com.termux/files/home/node_modules/@whiskeysockets/baileys/src/Utils/messages.ts:254:53)\n    at async Promise.all (index 1)\n    at async prepareWAMessageMedia (/data/data/com.termux/files/home/node_modules/@whiskeysockets/baileys/src/Utils/messages.ts:241:37)\n    at async generateWAMessageContent (/data/data/com.termux/files/home/node_modules/@whiskeysockets/baileys/src/Utils/messages.ts:611:7)\n    at async generateWAMessage (/data/data/com.termux/files/home/node_modules/@whiskeysockets/baileys/src/Utils/messages.ts:770:43)\n    at async Object.sendMessage (/data/data/com.termux/files/home/node_modules/@whiskeysockets/baileys/src/Socket/messages-send.ts:1345:21)\n    at async EventEmitter.<anonymous> (/data/data/com.termux/files/home/index.js:124:17)","msg":"failed to obtain extra info"}
+{"level":30,"time":"2026-08-06T14:34:54.871Z","pid":5072,"hostname":"localhost","class":"baileys","jid":"259210352812204@lid","addr":"259210352812204_1.0","msg":"identity key changed or new contact, session will be re-established"}
+{"level":30,"time":"2026-08-06T14:36:02.201Z","pid":5072,"hostname":"localhost","class":"baileys","jid":"62311922430103@lid","addr":"62311922430103_1.0","msg":"identity key changed or new contact, session will be re-established"}
+{"level":50,"time":"2026-08-06T14:36:20.691Z","pid":5072,"hostname":"localhost","class":"baileys","error":{},"msg":"transaction failed, rolling back"}
+{"level":50,"time":"2026-08-06T14:36:20.692Z","pid":5072,"hostname":"localhost","class":"baileys","key":{"remoteJid":"status@broadcast","remoteJidAlt":"918891815745@s.whatsapp.net","fromMe":false,"id":"ACA297EEE9B797D15EDED1E4103BC9EB","participant":"214564083908608@lid","addressingMode":"lid"},"err":{"type":"Error","message":"No session found to decrypt message","stack":"Error: No session found to decrypt message\n    at GroupCipher.decrypt (/data/data/com.termux/files/home/node_modules/@whiskeysockets/baileys/src/Signal/Group/group_cipher.ts:58:10)\n    at async <anonymous> (/data/data/com.termux/files/home/node_modules/@whiskeysockets/baileys/src/Utils/auth-utils.ts:327:22)"},"messageType":"skmsg","sender":"status@broadcast","author":"214564083908608@lid","isSessionRecordError":false,"msg":"failed to decrypt message"}
+{"level":30,"time":"2026-08-06T14:36:20.696Z","pid":5072,"hostname":"localhost","class":"baileys","msgAttrs":{"from":"status@broadcast","type":"text","edit":"7","id":"ACA297EEE9B797D15EDED1E4103BC9EB","participant":"214564083908608@lid","sts":"1786026982072225","notify":"mom","participant_pn":"918891815745@s.whatsapp.net","t":"1786026982"},"retryCount":1,"msg":"sent retry receipt"}
+{"level":30,"time":"2026-08-06T14:36:31.520Z","pid":5072,"hostname":"localhost","class":"baileys","jid":"214564083908608@lid","addr":"214564083908608_1.0","msg":"identity key changed or new contact, session will be re-established"}
+Closing session: SessionEntry {
+  _chains: {
+    BQTvTaIRrf1mOZBzQdAxNHNr0veNpcZsIeeVg2eMLg4S: { chainKey: [Object], chainType: 2, messageKeys: {} },
+    BYZPLlOfplCZTlPpDECfEXDTpLQTLY0yyUqwvlAbOWYz: { chainKey: [Object], chainType: 2, messageKeys: {} },
+    'BeWLqJX/Mx8873fVJBo9dP+4lKqDvm8IQDpRt3Xsav5n': { chainKey: [Object], chainType: 1, messageKeys: {} }
+  },
+  registrationId: 992756417,
+  currentRatchet: {
+    ephemeralKeyPair: {
+      pubKey: <Buffer 05 e5 8b a8 95 ff 33 1f 3c ef 77 d5 24 1a 3d 74 ff b8 94 aa 83 be 6f 08 40 3a 51 b7 75 ec 6a fe 67>,
+      privKey: <Buffer 70 e9 52 60 63 72 6f 2b b8 96 0f b6 3a 4d 06 3a d3 66 7b 80 e9 8d 0b ce 46 63 6c e8 8d 8e 0a 4c>
+    },
+    lastRemoteEphemeralKey: <Buffer 05 86 4f 2e 53 9f a6 50 99 4e 53 e9 0c 40 9f 11 70 d3 a4 b4 13 2d 8d 32 c9 4a b0 be 50 1b 39 66 33>,
+    previousCounter: 1,
+    rootKey: <Buffer cd 46 1a 39 30 fc ee 90 d9 9c 0a a7 eb 1a 6e 34 c5 ab f5 40 3f f7 f7 c3 d4 e6 47 2d 3e 0e 67 4d>
+  },
+  indexInfo: {
+    baseKey: <Buffer 05 54 40 92 a8 2a f6 00 66 17 b4 af 3b 49 b6 41 d9 60 69 78 1d af 48 d2 c2 45 9d 0c c3 a1 63 7d 14>,
+    baseKeyType: 1,
+    closed: -1,
+    used: 1786026986349,
+    created: 1786026687648,
+    remoteIdentityKey: <Buffer 05 f7 ea 99 ee 79 81 5a 58 c2 5f c8 98 5d 4a 2e e2 41 7c 3e 35 5a 07 56 88 d3 99 11 6c dd 96 88 28>
+  }
+}
+{"level":30,"time":"2026-08-06T14:37:26.517Z","pid":5072,"hostname":"localhost","class":"baileys","jid":"62277160058886@lid","addr":"62277160058886_1.0","msg":"identity key changed or new contact, session will be re-established"}
+{"level":40,"time":"2026-08-06T14:37:32.064Z","pid":5072,"hostname":"localhost","class":"baileys","msgId":"44143.578-37","msg":"timed out waiting for message"}
+Closing session: SessionEntry {
+  _chains: {
+    BYVsCmiNlnFV0Ahpt9LSm1l8FUCHk6c4xmCPSkPgtDQf: { chainKey: [Object], chainType: 1, messageKeys: {} }
+  },
+  registrationId: 992756417,
+  currentRatchet: {
+    ephemeralKeyPair: {
+      pubKey: <Buffer 05 85 6c 0a 68 8d 96 71 55 d0 08 69 b7 d2 d2 9b 59 7c 15 40 87 93 a7 38 c6 60 8f 4a 43 e0 b4 34 1f>,
+      privKey: <Buffer f0 a5 b2 03 47 92 61 2d 98 6c ac b5 07 31 ad 2b 9e 02 d0 4f 07 58 bf b6 76 e4 5a 91 f3 55 cd 40>
+    },
+    lastRemoteEphemeralKey: <Buffer 05 50 11 d6 a2 c2 58 25 11 32 b5 c4 8c a0 bb f6 33 a8 73 87 e7 e1 23 51 59 ff e8 fe e4 29 a6 d9 10>,
+    previousCounter: 0,
+    rootKey: <Buffer d9 63 c6 3d ed 8c a9 9e 82 78 76 f9 66 8a 4e 4e 94 c4 94 bb 59 78 cc 2b f8 98 9f 33 e1 d6 c9 5f>
+  },
+  indexInfo: {
+    baseKey: <Buffer 05 32 8f 0d ef 7a 36 e0 f6 25 fa ab 52 e7 5c 59 a8 ee ee 7d 63 1f 9c 32 6f 13 04 3f a5 6c 27 a1 6d>,
+    baseKeyType: 1,
+    closed: -1,
+    used: 1786026993062,
+    created: 1786026993062,
+    remoteIdentityKey: <Buffer 05 f7 ea 99 ee 79 81 5a 58 c2 5f c8 98 5d 4a 2e e2 41 7c 3e 35 5a 07 56 88 d3 99 11 6c dd 96 88 28>
+  },
+  pendingPreKey: {
+    signedKeyId: 10595806,
+    baseKey: <Buffer 05 32 8f 0d ef 7a 36 e0 f6 25 fa ab 52 e7 5c 59 a8 ee ee 7d 63 1f 9c 32 6f 13 04 3f a5 6c 27 a1 6d>,
+    preKeyId: 14292963
+  }
+}
