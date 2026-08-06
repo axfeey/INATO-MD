@@ -1,4 +1,18 @@
-y.remoteJid;
+ction === 'close') {
+            const reason = lastDisconnect?.error?.output?.statusCode;
+            if (reason !== DisconnectReason.loggedOut && reason !== DisconnectReason.connectionReplaced) {
+                connectToWhatsApp();
+            }
+        } else if (connection === 'open') {
+            console.log(`✅ ${BOT_NAME} Connected Successfully!`);
+        }
+    });
+
+    sock.ev.on('messages.upsert', async (m) => {
+        const msg = m.messages[0];
+        if (!msg.message) return;
+
+        const from = msg.key.remoteJid;
         const isGroup = from.endsWith('@g.us');
         const sender = msg.key.participant || from;
         const isOwner = SUDO_USERS.includes(sender) || msg.key.fromMe;
@@ -16,20 +30,19 @@ y.remoteJid;
 
         // Auto Download Links using yt-dlp
         if (text.includes("instagram.com") || text.includes("facebook.com") || text.includes("fb.watch") || text.includes("youtu.be") || text.includes("youtube.com")) {
-            await sock.sendMessage(from, { text: '│ 📥 *Downloading media...*', ...getBotContext() }, { quoted: msg });
+            await sock.sendMessage(from, { text: '│ 📥 *Downloading media...*' }, { quoted: msg });
             
             const fileName = `./temp_${Date.now()}.mp4`;
             const cmd = `yt-dlp -o "${fileName}" -f "b[ext=mp4]/b" "${text.trim()}"`;
 
             exec(cmd, async (error) => {
                 if (error || !fs.existsSync(fileName)) {
-                    return sock.sendMessage(from, { text: '│ ❌ ഡൗൺലോഡ് ചെയ്യാൻ കഴിഞ്ഞില്ല!', ...getBotContext() }, { quoted: msg });
+                    return sock.sendMessage(from, { text: '│ ❌ ഡൗൺലോഡ് ചെയ്യാൻ കഴിഞ്ഞില്ല!' }, { quoted: msg });
                 }
 
                 await sock.sendMessage(from, { 
                     video: fs.readFileSync(fileName), 
-                    caption: `│ Downloaded by *${BOT_NAME}*\n│ Owner: *${OWNER_NAME}*`,
-                    ...getBotContext()
+                    caption: `│ Downloaded by *${BOT_NAME}*\n│ Owner: *${OWNER_NAME}*`
                 }, { quoted: msg });
                 
                 if (fs.existsSync(fileName)) fs.unlinkSync(fileName);
@@ -47,7 +60,28 @@ y.remoteJid;
         switch (cmd) {
             case 'ping':
                 const start = Date.now();
-             const { default: makeWASocket, useMultiFileAuthState, downloadContentFromMessage, DisconnectReason } = require('@whiskeysockets/baileys');
+                await sock.sendMessage(from, { text: '│ ⚡ *Checking latency...*' }, { quoted: msg });
+                const end = Date.now();
+                
+                const pingText = `┌───〔 🏓 *BOT SPEED* 〕
+│
+│ 🚀 *Latency:* ${end - start} ms
+│ 🤖 *Bot:* ${BOT_NAME}
+│ 🌐 *Mode:* ${botMode}
+│ 👑 *Owner:* ${OWNER_NAME}
+│
+└───〔 *${BOT_NAME}* 〕`;
+                await sock.sendMessage(from, { text: pingText }, { quoted: msg });
+                break;
+
+            case 'menu':
+            case 'list':
+            case 'info':
+            case 'alive':
+                const menuText = `┌───〔 🤖 *${BOT_NAME}* 〕
+│
+│ 👤 *Owner:* ${OWNER_NAME}
+│ �const { default: makeWASocket, useMultiFileAuthState, downloadContentFromMessage, DisconnectReason } = require('@whiskeysockets/baileys');
 const qrcode = require('qrcode-terminal');
 const yts = require('yt-search');
 const googleTTS = require('google-tts-api');
@@ -192,7 +226,6 @@ async function connectToWhatsApp() {
                 await sock.sendMessage(from, { text: `│ 🎶 Downloading Audio: *${audioInfo.title}*\n│ 🤖 Bot: *${BOT_NAME}*` }, { quoted: msg });
 
                 try {
-                    // Direct Working API for MP3 Audio
                     const res = await axios.get(`https://api.vreden.my.id/api/ytmp3?url=${encodeURIComponent(audioInfo.url)}`);
                     const downloadUrl = res.data?.result?.download?.url;
 
@@ -206,7 +239,6 @@ async function connectToWhatsApp() {
                         throw new Error("API Download Failed");
                     }
                 } catch (e) {
-                    // Fallback to Local yt-dlp
                     const songFile = `./temp_audio_${Date.now()}.mp3`;
                     const dlCmd = `yt-dlp -x --audio-format mp3 -o "${songFile}" "${audioInfo.url}"`;
 
