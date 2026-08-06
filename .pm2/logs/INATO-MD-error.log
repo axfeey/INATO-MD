@@ -1,0 +1,81 @@
+Closing open session in favor of incoming prekey bundle
+Decrypted message with closed session.
+Decrypted message with closed session.
+Closing open session in favor of incoming prekey bundle
+Closing open session in favor of incoming prekey bundle
+Closing open session in favor of incoming prekey bundle
+Error: Incorrect private key length: 0
+    at validatePrivKey (/data/data/com.termux/files/home/node_modules/libsignal/src/curve.js:29:15)
+    at exports.calculateSignature (/data/data/com.termux/files/home/node_modules/libsignal/src/curve.js:123:5)
+    at SenderKeyMessage.getSignature (/data/data/com.termux/files/home/node_modules/@whiskeysockets/baileys/src/Signal/Group/sender-key-message.ts:86:22)
+    at new SenderKeyMessage (/data/data/com.termux/files/home/node_modules/@whiskeysockets/baileys/src/Signal/Group/sender-key-message.ts:55:27)
+    at GroupCipher.encrypt (/data/data/com.termux/files/home/node_modules/@whiskeysockets/baileys/src/Signal/Group/group_cipher.ts:38:28)
+    at async <anonymous> (/data/data/com.termux/files/home/node_modules/@whiskeysockets/baileys/src/Signal/libsignal.ts:169:24)
+    at async <anonymous> (/data/data/com.termux/files/home/node_modules/@whiskeysockets/baileys/src/Socket/messages-send.ts:766:58)
+    at async <anonymous> (/data/data/com.termux/files/home/node_modules/@whiskeysockets/baileys/src/Utils/auth-utils.ts:327:22)
+Error: Incorrect private key length: 0
+    at validatePrivKey (/data/data/com.termux/files/home/node_modules/libsignal/src/curve.js:29:15)
+    at exports.calculateSignature (/data/data/com.termux/files/home/node_modules/libsignal/src/curve.js:123:5)
+    at SenderKeyMessage.getSignature (/data/data/com.termux/files/home/node_modules/@whiskeysockets/baileys/src/Signal/Group/sender-key-message.ts:86:22)
+    at new SenderKeyMessage (/data/data/com.termux/files/home/node_modules/@whiskeysockets/baileys/src/Signal/Group/sender-key-message.ts:55:27)
+    at GroupCipher.encrypt (/data/data/com.termux/files/home/node_modules/@whiskeysockets/baileys/src/Signal/Group/group_cipher.ts:38:28)
+    at async <anonymous> (/data/data/com.termux/files/home/node_modules/@whiskeysockets/baileys/src/Signal/libsignal.ts:169:24)
+    at async <anonymous> (/data/data/com.termux/files/home/node_modules/@whiskeysockets/baileys/src/Socket/messages-send.ts:766:58)
+    at async <anonymous> (/data/data/com.termux/files/home/node_modules/@whiskeysockets/baileys/src/Utils/auth-utils.ts:327:22)
+Closing open session in favor of incoming prekey bundle
+Closing open session in favor of incoming prekey bundle
+Closing open session in favor of incoming prekey bundle
+Closing open session in favor of incoming prekey bundle
+Error: Incorrect private key length: 0
+    at validatePrivKey (/data/data/com.termux/files/home/node_modules/libsignal/src/curve.js:29:15)
+    at exports.calculateSignature (/data/data/com.termux/files/home/node_modules/libsignal/src/curve.js:123:5)
+    at SenderKeyMessage.getSignature (/data/data/com.termux/files/home/node_modules/@whiskeysockets/baileys/src/Signal/Group/sender-key-message.ts:86:22)
+    at new SenderKeyMessage (/data/data/com.termux/files/home/node_modules/@whiskeysockets/baileys/src/Signal/Group/sender-key-message.ts:55:27)
+    at GroupCipher.encrypt (/data/data/com.termux/files/home/node_modules/@whiskeysockets/baileys/src/Signal/Group/group_cipher.ts:38:28)
+    at async <anonymous> (/data/data/com.termux/files/home/node_modules/@whiskeysockets/baileys/src/Signal/libsignal.ts:169:24)
+    at async <anonymous> (/data/data/com.termux/files/home/node_modules/@whiskeysockets/baileys/src/Socket/messages-send.ts:766:58)
+    at async <anonymous> (/data/data/com.termux/files/home/node_modules/@whiskeysockets/baileys/src/Utils/auth-utils.ts:327:22)
+Closing open session in favor of incoming prekey bundle
+Closing open session in favor of incoming prekey bundle
+Closing open session in favor of incoming prekey bundle
+Closing open session in favor of incoming prekey bundle
+Closing open session in favor of incoming prekey bundle
+Closing open session in favor of incoming prekey bundle
+Closing open session in favor of incoming prekey bundle
+Closing open session in favor of incoming prekey bundle
+Closing open session in favor of incoming prekey bundle
+Error: ENOENT: no such file or directory, open 'auth_info_baileys/creds.json'
+    at async open (node:internal/fs/promises:1287:25)
+    at async writeFile (node:internal/fs/promises:1908:14)
+    at async <anonymous> (/data/data/com.termux/files/home/node_modules/@whiskeysockets/baileys/src/Utils/use-multi-file-auth-state.ts:43:5) {
+  errno: -2,
+  code: 'ENOENT',
+  syscall: 'open',
+  path: 'auth_info_baileys/creds.json'
+}
+Closing open session in favor of incoming prekey bundle
+Error: Invalid group metadata response: missing <group> node
+    at extractGroupMetadata (/data/data/com.termux/files/home/node_modules/@whiskeysockets/baileys/src/Socket/groups.ts:315:9)
+    at groupMetadata (/data/data/com.termux/files/home/node_modules/@whiskeysockets/baileys/src/Socket/groups.ts:35:10)
+    at async <anonymous> (/data/data/com.termux/files/home/node_modules/@whiskeysockets/baileys/src/Socket/messages-send.ts:716:20)
+    at async Promise.all (index 0)
+    at async <anonymous> (/data/data/com.termux/files/home/node_modules/@whiskeysockets/baileys/src/Socket/messages-send.ts:710:39)
+    at async <anonymous> (/data/data/com.termux/files/home/node_modules/@whiskeysockets/baileys/src/Utils/auth-utils.ts:327:22) {
+  data: null,
+  isBoom: true,
+  isServer: true,
+  output: {
+    statusCode: 500,
+    payload: {
+      statusCode: 500,
+      error: 'Internal Server Error',
+      message: 'An internal server error occurred'
+    },
+    headers: {}
+  }
+}
+Closing open session in favor of incoming prekey bundle
+Closing open session in favor of incoming prekey bundle
+Closing open session in favor of incoming prekey bundle
+Closing open session in favor of incoming prekey bundle
+Closing open session in favor of incoming prekey bundle

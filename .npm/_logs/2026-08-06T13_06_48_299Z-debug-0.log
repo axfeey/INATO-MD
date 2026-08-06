@@ -1,0 +1,478 @@
+0 verbose cli /data/data/com.termux/files/usr/bin/node /data/data/com.termux/files/usr/bin/npm
+1 info using npm@11.17.0
+2 info using node@v26.3.1
+3 silly config load:file:/data/data/com.termux/files/usr/lib/node_modules/npm/npmrc
+4 silly config load:file:/data/data/com.termux/files/home/.npmrc
+5 silly config load:file:/data/data/com.termux/files/usr/etc/npmrc
+6 verbose title npm install instagram-url-direct axios
+7 verbose argv "install" "instagram-url-direct" "axios"
+8 verbose logfile logs-max:10 dir:/data/data/com.termux/files/home/.npm/_logs/2026-08-06T13_06_48_299Z-
+9 verbose logfile /data/data/com.termux/files/home/.npm/_logs/2026-08-06T13_06_48_299Z-debug-0.log
+10 silly logfile done cleaning log files
+11 silly packumentCache heap:1174405120 maxSize:293601280 maxEntrySize:146800640
+12 silly idealTree buildDeps
+13 silly fetch manifest axios@^1.19.0
+14 silly packumentCache full:https://registry.npmjs.org/axios cache-miss
+15 http fetch GET 200 https://registry.npmjs.org/axios 872ms (cache revalidated)
+16 silly packumentCache full:https://registry.npmjs.org/axios set size:850874 disposed:false
+17 silly fetch manifest instagram-url-direct@*
+18 silly packumentCache full:https://registry.npmjs.org/instagram-url-direct cache-miss
+19 http fetch GET 200 https://registry.npmjs.org/instagram-url-direct 392ms (cache miss)
+20 silly packumentCache full:https://registry.npmjs.org/instagram-url-direct set size:undefined disposed:false
+21 silly placeDep ROOT axios@1.19.0 REPLACE for: home@1.0.0 want: ^1.19.0
+22 silly placeDep ROOT instagram-url-direct@2.0.7 OK for: home@1.0.0 want: *
+23 silly fetch manifest qs@^6.13.0
+24 silly packumentCache full:https://registry.npmjs.org/qs cache-miss
+25 http fetch GET 200 https://registry.npmjs.org/qs 113ms (cache revalidated)
+26 silly packumentCache full:https://registry.npmjs.org/qs set size:360318 disposed:false
+27 silly placeDep node_modules/instagram-url-direct qs@6.15.3 OK for: instagram-url-direct@2.0.7 want: ^6.13.0
+28 silly fetch manifest side-channel@^1.1.1
+29 silly packumentCache full:https://registry.npmjs.org/side-channel cache-miss
+30 http fetch GET 200 https://registry.npmjs.org/side-channel 86ms (cache miss)
+31 silly packumentCache full:https://registry.npmjs.org/side-channel set size:undefined disposed:false
+32 silly placeDep ROOT side-channel@1.1.1 OK for: qs@6.15.3 want: ^1.1.1
+33 silly fetch manifest object-inspect@^1.13.4
+34 silly packumentCache full:https://registry.npmjs.org/object-inspect cache-miss
+35 silly fetch manifest side-channel-list@^1.0.1
+36 silly packumentCache full:https://registry.npmjs.org/side-channel-list cache-miss
+37 silly fetch manifest side-channel-map@^1.0.1
+38 silly packumentCache full:https://registry.npmjs.org/side-channel-map cache-miss
+39 silly fetch manifest side-channel-weakmap@^1.0.2
+40 silly packumentCache full:https://registry.npmjs.org/side-channel-weakmap cache-miss
+41 http fetch GET 200 https://registry.npmjs.org/object-inspect 127ms (cache miss)
+42 silly packumentCache full:https://registry.npmjs.org/object-inspect set size:undefined disposed:false
+43 http fetch GET 200 https://registry.npmjs.org/side-channel-map 215ms (cache miss)
+44 silly packumentCache full:https://registry.npmjs.org/side-channel-map set size:undefined disposed:false
+45 http fetch GET 200 https://registry.npmjs.org/side-channel-weakmap 263ms (cache miss)
+46 silly packumentCache full:https://registry.npmjs.org/side-channel-weakmap set size:undefined disposed:false
+47 http fetch GET 200 https://registry.npmjs.org/side-channel-list 272ms (cache miss)
+48 silly packumentCache full:https://registry.npmjs.org/side-channel-list set size:undefined disposed:false
+49 silly placeDep ROOT object-inspect@1.13.4 OK for: side-channel@1.1.1 want: ^1.13.4
+50 silly placeDep ROOT side-channel-list@1.0.1 OK for: side-channel@1.1.1 want: ^1.0.1
+51 silly placeDep ROOT side-channel-map@1.0.1 OK for: side-channel@1.1.1 want: ^1.0.1
+52 silly placeDep ROOT side-channel-weakmap@1.0.2 OK for: side-channel@1.1.1 want: ^1.0.2
+53 silly fetch manifest call-bound@^1.0.2
+54 silly packumentCache full:https://registry.npmjs.org/call-bound cache-miss
+55 silly fetch manifest call-bound@^1.0.2
+56 silly packumentCache full:https://registry.npmjs.org/call-bound cache-miss
+57 http fetch GET 200 https://registry.npmjs.org/call-bound 93ms (cache miss)
+58 silly packumentCache full:https://registry.npmjs.org/call-bound set size:undefined disposed:false
+59 http fetch GET 200 https://registry.npmjs.org/call-bound 106ms (cache miss)
+60 silly packumentCache full:https://registry.npmjs.org/call-bound set size:undefined disposed:false
+61 silly placeDep ROOT call-bound@1.0.4 OK for: side-channel-map@1.0.1 want: ^1.0.2
+62 silly reify moves {}
+63 silly audit bulk request {
+63 silly audit   '@borewit/text-codec': [ '0.2.2' ],
+63 silly audit   '@cacheable/memory': [ '2.2.0' ],
+63 silly audit   '@cacheable/node-cache': [ '1.7.6' ],
+63 silly audit   '@cacheable/utils': [ '2.5.0' ],
+63 silly audit   '@emnapi/runtime': [ '1.11.3' ],
+63 silly audit   '@hapi/boom': [ '9.1.4' ],
+63 silly audit   '@hapi/hoek': [ '9.3.0' ],
+63 silly audit   '@img/colour': [ '1.1.0' ],
+63 silly audit   '@img/sharp-darwin-arm64': [ '0.35.3' ],
+63 silly audit   '@img/sharp-darwin-x64': [ '0.35.3' ],
+63 silly audit   '@img/sharp-freebsd-wasm32': [ '0.35.3' ],
+63 silly audit   '@img/sharp-libvips-darwin-arm64': [ '1.3.2' ],
+63 silly audit   '@img/sharp-libvips-darwin-x64': [ '1.3.2' ],
+63 silly audit   '@img/sharp-libvips-linux-arm': [ '1.3.2' ],
+63 silly audit   '@img/sharp-libvips-linux-arm64': [ '1.3.2' ],
+63 silly audit   '@img/sharp-libvips-linux-ppc64': [ '1.3.2' ],
+63 silly audit   '@img/sharp-libvips-linux-riscv64': [ '1.3.2' ],
+63 silly audit   '@img/sharp-libvips-linux-s390x': [ '1.3.2' ],
+63 silly audit   '@img/sharp-libvips-linux-x64': [ '1.3.2' ],
+63 silly audit   '@img/sharp-libvips-linuxmusl-arm64': [ '1.3.2' ],
+63 silly audit   '@img/sharp-libvips-linuxmusl-x64': [ '1.3.2' ],
+63 silly audit   '@img/sharp-linux-arm': [ '0.35.3' ],
+63 silly audit   '@img/sharp-linux-arm64': [ '0.35.3' ],
+63 silly audit   '@img/sharp-linux-ppc64': [ '0.35.3' ],
+63 silly audit   '@img/sharp-linux-riscv64': [ '0.35.3' ],
+63 silly audit   '@img/sharp-linux-s390x': [ '0.35.3' ],
+63 silly audit   '@img/sharp-linux-x64': [ '0.35.3' ],
+63 silly audit   '@img/sharp-linuxmusl-arm64': [ '0.35.3' ],
+63 silly audit   '@img/sharp-linuxmusl-x64': [ '0.35.3' ],
+63 silly audit   '@img/sharp-wasm32': [ '0.35.3' ],
+63 silly audit   '@img/sharp-webcontainers-wasm32': [ '0.35.3' ],
+63 silly audit   '@img/sharp-win32-arm64': [ '0.35.3' ],
+63 silly audit   '@img/sharp-win32-ia32': [ '0.35.3' ],
+63 silly audit   '@img/sharp-win32-x64': [ '0.35.3' ],
+63 silly audit   '@jsep-plugin/assignment': [ '1.3.0' ],
+63 silly audit   '@jsep-plugin/regex': [ '1.0.4' ],
+63 silly audit   '@keyv/bigmap': [ '1.3.1' ],
+63 silly audit   '@keyv/serialize': [ '1.1.1' ],
+63 silly audit   '@pinojs/redact': [ '0.4.0' ],
+63 silly audit   '@protobufjs/aspromise': [ '1.1.2' ],
+63 silly audit   '@protobufjs/base64': [ '1.1.2' ],
+63 silly audit   '@protobufjs/codegen': [ '2.0.5' ],
+63 silly audit   '@protobufjs/eventemitter': [ '1.1.1' ],
+63 silly audit   '@protobufjs/fetch': [ '1.1.1' ],
+63 silly audit   '@protobufjs/float': [ '1.0.2' ],
+63 silly audit   '@protobufjs/path': [ '1.1.2' ],
+63 silly audit   '@protobufjs/pool': [ '1.1.0' ],
+63 silly audit   '@protobufjs/utf8': [ '1.1.2' ],
+63 silly audit   '@tokenizer/inflate': [ '0.4.1' ],
+63 silly audit   '@tokenizer/token': [ '0.3.0' ],
+63 silly audit   '@types/node': [ '26.1.2' ],
+63 silly audit   '@whiskeysockets/baileys': [ '7.0.0-rc14' ],
+63 silly audit   'agent-base': [ '6.0.2' ],
+63 silly audit   ajv: [ '6.15.0' ],
+63 silly audit   'ansi-regex': [ '3.0.1' ],
+63 silly audit   asn1: [ '0.2.6' ],
+63 silly audit   'assert-plus': [ '1.0.0' ],
+63 silly audit   async: [ '0.2.10', '2.6.4' ],
+63 silly audit   'async-mutex': [ '0.5.0' ],
+63 silly audit   'async.parallellimit': [ '0.5.2' ],
+63 silly audit   'async.util.eachoflimit': [ '0.5.2' ],
+63 silly audit   'async.util.isarray': [ '0.5.2' ],
+63 silly audit   'async.util.isarraylike': [ '0.5.2' ],
+63 silly audit   'async.util.keyiterator': [ '0.5.2' ],
+63 silly audit   'async.util.keys': [ '0.5.2' ],
+63 silly audit   'async.util.noop': [ '0.5.2' ],
+63 silly audit   'async.util.once': [ '0.5.2' ],
+63 silly audit   'async.util.onlyonce': [ '0.5.2' ],
+63 silly audit   'async.util.parallel': [ '0.5.2' ],
+63 silly audit   'async.util.restparam': [ '0.5.2' ],
+63 silly audit   asynckit: [ '0.4.0' ],
+63 silly audit   'atomic-sleep': [ '1.0.0' ],
+63 silly audit   'aws-sign2': [ '0.7.0' ],
+63 silly audit   aws4: [ '1.13.2' ],
+63 silly audit   'balanced-match': [ '1.0.2' ],
+63 silly audit   'bcrypt-pbkdf': [ '1.0.2' ],
+63 silly audit   boolbase: [ '1.0.0' ],
+63 silly audit   boolstring: [ '2.0.1' ],
+63 silly audit   'brace-expansion': [ '1.1.18' ],
+63 silly audit   cacheable: [ '2.5.0' ],
+63 silly audit   'call-bind-apply-helpers': [ '1.0.2' ],
+63 silly audit   caseless: [ '0.12.0' ],
+63 silly audit   cheerio: [ '1.2.0' ],
+63 silly audit   'cheerio-select': [ '2.1.0' ],
+63 silly audit   'combined-stream': [ '1.0.8' ],
+63 silly audit   'concat-map': [ '0.0.1' ],
+63 silly audit   'content-type': [ '2.0.0' ],
+63 silly audit   'core-util-is': [ '1.0.3', '1.0.2' ],
+63 silly audit   'css-select': [ '5.2.2' ],
+63 silly audit   'css-what': [ '6.2.2' ],
+63 silly audit   'curve25519-js': [ '0.0.4' ],
+63 silly audit   dashdash: [ '1.14.1' ],
+63 silly audit   dasu: [ '0.4.3' ],
+63 silly audit   debug: [ '4.4.3' ],
+63 silly audit   'delayed-stream': [ '1.0.0' ],
+63 silly audit   'detect-libc': [ '2.1.2' ],
+63 silly audit   'dom-serializer': [ '2.0.0' ],
+63 silly audit   domelementtype: [ '2.3.0' ],
+63 silly audit   domhandler: [ '5.0.3' ],
+63 silly audit   domutils: [ '3.2.2' ],
+63 silly audit   'dunder-proto': [ '1.0.1' ],
+63 silly audit   'ecc-jsbn': [ '0.1.2' ],
+63 silly audit   'encoding-sniffer': [ '0.2.1' ],
+63 silly audit   entities: [ '4.5.0', '7.0.1', '6.0.1' ],
+63 silly audit   'es-define-property': [ '1.0.1' ],
+63 silly audit   'es-errors': [ '1.3.0' ],
+63 silly audit   'es-object-atoms': [ '1.1.2' ],
+63 silly audit   'es-set-tostringtag': [ '2.1.0' ],
+63 silly audit   'escape-string-regexp': [ '1.0.5' ],
+63 silly audit   eventemitter3: [ '5.0.4' ],
+63 silly audit   extend: [ '3.0.2' ],
+63 silly audit   extsprintf: [ '1.3.0' ],
+63 silly audit   'fake-useragent': [ '1.0.1' ],
+63 silly audit   'fast-deep-equal': [ '3.1.3' ],
+63 silly audit   'fast-json-stable-stringify': [ '2.1.0' ],
+63 silly audit   'file-type': [ '21.3.4' ],
+63 silly audit   'fluent-ffmpeg': [ '2.1.3' ],
+63 silly audit   'follow-redirects': [ '1.16.0' ],
+63 silly audit   'forever-agent': [ '0.6.1' ],
+63 silly audit   'form-data': [ '4.0.6', '2.3.3' ],
+63 silly audit   'function-bind': [ '1.1.2' ],
+63 silly audit   'get-intrinsic': [ '1.3.0' ],
+63 silly audit   'get-proto': [ '1.0.1' ],
+63 silly audit   getpass: [ '0.1.7' ],
+63 silly audit   gopd: [ '1.2.0' ],
+63 silly audit   'har-schema': [ '2.0.0' ],
+63 silly audit   'har-validator': [ '5.1.5' ],
+63 silly audit   'has-symbols': [ '1.1.0' ],
+63 silly audit   'has-tostringtag': [ '1.0.2' ],
+63 silly audit   hashery: [ '1.5.1' ],
+63 silly audit   hasown: [ '2.0.4' ],
+63 silly audit   hookified: [ '1.15.1', '2.2.0' ],
+63 silly audit   htmlparser2: [ '10.1.0' ],
+63 silly audit   'http-signature': [ '1.2.0' ],
+63 silly audit   'https-proxy-agent': [ '5.0.1' ],
+63 silly audit   'human-time': [ '0.0.2' ],
+63 silly audit   'iconv-lite': [ '0.6.3' ],
+63 silly audit   ieee754: [ '1.2.1' ],
+63 silly audit   inherits: [ '2.0.4' ],
+63 silly audit   'is-fullwidth-code-point': [ '2.0.0' ],
+63 silly audit   'is-typedarray': [ '1.0.0' ],
+63 silly audit   isarray: [ '1.0.0' ],
+63 silly audit   isexe: [ '2.0.0' ],
+63 silly audit   isstream: [ '0.1.2' ],
+63 silly audit   jsbn: [ '0.1.1' ],
+63 silly audit   jsep: [ '1.4.0' ],
+63 silly audit   'json-schema': [ '0.4.0' ],
+63 silly audit   'json-schema-traverse': [ '0.4.1' ],
+63 silly audit   'json-stringify-safe': [ '5.0.1' ],
+63 silly audit   'jsonpath-plus': [ '10.3.0' ],
+63 silly audit   jsprim: [ '1.4.2' ],
+63 silly audit   keypress: [ '0.2.1' ],
+63 silly audit   keyv: [ '5.6.0' ],
+63 silly audit   libsignal: [ '6.0.0' ],
+63 silly audit   lodash: [ '4.18.1' ],
+63 silly audit   long: [ '5.3.2' ],
+63 silly audit   'lru-cache': [ '11.5.2' ],
+63 silly audit   'math-intrinsics': [ '1.1.0' ],
+63 silly audit   'media-typer': [ '2.0.0' ],
+63 silly audit   'mime-db': [ '1.52.0' ],
+63 silly audit   'mime-types': [ '2.1.35' ],
+63 silly audit   'mimic-fn': [ '2.1.0' ],
+63 silly audit   minimatch: [ '3.0.8' ],
+63 silly audit   minimist: [ '1.2.8' ],
+63 silly audit   ms: [ '2.1.3' ],
+63 silly audit   multistream: [ '2.1.1' ],
+63 silly audit   'music-metadata': [ '11.14.0' ],
+63 silly audit   'node-fetch': [ '2.7.0' ],
+63 silly audit   'node-fzf': [ '0.14.0' ],
+63 silly audit   'node-gtts': [ '2.0.2' ],
+63 silly audit   'nth-check': [ '2.1.1' ],
+63 silly audit   'oauth-sign': [ '0.9.0' ],
+63 silly audit   'on-exit-leak-free': [ '2.1.2' ],
+63 silly audit   onetime: [ '5.1.2' ],
+63 silly audit   'p-queue': [ '9.3.3' ],
+63 silly audit   'p-timeout': [ '7.0.1' ],
+63 silly audit   parse5: [ '7.3.0' ],
+63 silly audit   'parse5-htmlparser2-tree-adapter': [ '7.1.0' ],
+63 silly audit   'parse5-parser-stream': [ '7.1.2' ],
+63 silly audit   'performance-now': [ '2.1.0' ],
+63 silly audit   picocolors: [ '1.1.1' ],
+63 silly audit   pino: [ '9.14.0' ],
+63 silly audit   'pino-abstract-transport': [ '2.0.0' ],
+63 silly audit   'pino-std-serializers': [ '7.1.0' ],
+63 silly audit   'process-nextick-args': [ '2.0.1' ],
+63 silly audit   'process-warning': [ '5.1.0' ],
+63 silly audit   protobufjs: [ '7.6.5' ],
+63 silly audit   'proxy-from-env': [ '2.1.0' ],
+63 silly audit   psl: [ '1.15.0' ],
+63 silly audit   punycode: [ '2.3.1' ],
+63 silly audit   qified: [ '0.10.1' ],
+63 silly audit   'qrcode-terminal': [ '0.12.0' ],
+63 silly audit   qs: [ '6.5.5', '6.15.3' ],
+63 silly audit   'quick-format-unescaped': [ '4.0.4' ],
+63 silly audit   'readable-stream': [ '2.3.8' ],
+63 silly audit   'real-require': [ '0.2.0' ],
+63 silly audit   redstar: [ '0.0.2' ],
+63 silly audit   request: [ '2.88.2' ],
+63 silly audit   'restore-cursor': [ '3.1.0' ],
+63 silly audit   'safe-buffer': [ '5.1.2' ],
+63 silly audit   'safe-stable-stringify': [ '2.5.0' ],
+63 silly audit   'safer-buffer': [ '2.1.2' ],
+63 silly audit   semver: [ '7.8.5' ],
+63 silly audit   sharp: [ '0.35.3' ],
+63 silly audit   'signal-exit': [ '3.0.7' ],
+63 silly audit   'sonic-boom': [ '4.2.1' ],
+63 silly audit   split2: [ '4.2.0' ],
+63 silly audit   sshpk: [ '1.18.0' ],
+63 silly audit   string_decoder: [ '1.1.1' ],
+63 silly audit   'string-width': [ '2.1.1' ],
+63 silly audit   'strip-ansi': [ '4.0.0' ],
+63 silly audit   strtok3: [ '10.3.5' ],
+63 silly audit   'thread-stream': [ '3.2.0' ],
+63 silly audit   'token-types': [ '6.1.2' ],
+63 silly audit   'tough-cookie': [ '2.5.0' ],
+63 silly audit   tr46: [ '0.0.3' ],
+63 silly audit   tslib: [ '2.8.1' ],
+63 silly audit   ttys: [ '0.0.3' ],
+63 silly audit   'tunnel-agent': [ '0.6.0' ],
+63 silly audit   tweetnacl: [ '0.14.5' ],
+63 silly audit   'uint8array-extras': [ '1.5.0' ],
+63 silly audit   undici: [ '7.29.0' ],
+63 silly audit   'undici-types': [ '8.3.0' ],
+63 silly audit   'uri-js': [ '4.4.1' ],
+63 silly audit   'util-deprecate': [ '1.0.2' ],
+63 silly audit   uuid: [ '3.4.0' ],
+63 silly audit   verror: [ '1.10.0' ],
+63 silly audit   'webidl-conversions': [ '3.0.1' ],
+63 silly audit   'whatsapp-rust-bridge': [ '0.5.4' ],
+63 silly audit   'whatwg-encoding': [ '3.1.1' ],
+63 silly audit   'whatwg-mimetype': [ '4.0.0' ],
+63 silly audit   'whatwg-url': [ '5.0.0' ],
+63 silly audit   which: [ '1.3.1' ],
+63 silly audit   'win-guid': [ '0.2.1' ],
+63 silly audit   ws: [ '8.21.2' ],
+63 silly audit   'yt-search': [ '2.13.1' ],
+63 silly audit   axios: [ '1.19.0' ],
+63 silly audit   'instagram-url-direct': [ '2.0.7' ],
+63 silly audit   'side-channel': [ '1.1.1' ],
+63 silly audit   'object-inspect': [ '1.13.4' ],
+63 silly audit   'side-channel-list': [ '1.0.1' ],
+63 silly audit   'side-channel-map': [ '1.0.1' ],
+63 silly audit   'side-channel-weakmap': [ '1.0.2' ],
+63 silly audit   'call-bound': [ '1.0.4' ]
+63 silly audit }
+64 http cache call-bound@https://registry.npmjs.org/call-bound/-/call-bound-1.0.4.tgz 0ms (cache hit)
+65 http cache side-channel-map@https://registry.npmjs.org/side-channel-map/-/side-channel-map-1.0.1.tgz 0ms (cache hit)
+66 http cache side-channel@https://registry.npmjs.org/side-channel/-/side-channel-1.1.1.tgz 0ms (cache hit)
+67 http cache side-channel-weakmap@https://registry.npmjs.org/side-channel-weakmap/-/side-channel-weakmap-1.0.2.tgz 0ms (cache hit)
+68 http cache instagram-url-direct@https://registry.npmjs.org/instagram-url-direct/-/instagram-url-direct-2.0.7.tgz 0ms (cache hit)
+69 http cache qs@https://registry.npmjs.org/qs/-/qs-6.15.3.tgz 0ms (cache hit)
+70 http cache side-channel-list@https://registry.npmjs.org/side-channel-list/-/side-channel-list-1.0.1.tgz 1ms (cache hit)
+71 http cache object-inspect@https://registry.npmjs.org/object-inspect/-/object-inspect-1.13.4.tgz 0ms (cache hit)
+72 silly tarball no local data for call-bound@https://registry.npmjs.org/call-bound/-/call-bound-1.0.4.tgz. Extracting by manifest.
+73 silly tarball no local data for side-channel-map@https://registry.npmjs.org/side-channel-map/-/side-channel-map-1.0.1.tgz. Extracting by manifest.
+74 silly tarball no local data for side-channel@https://registry.npmjs.org/side-channel/-/side-channel-1.1.1.tgz. Extracting by manifest.
+75 silly tarball no local data for side-channel-weakmap@https://registry.npmjs.org/side-channel-weakmap/-/side-channel-weakmap-1.0.2.tgz. Extracting by manifest.
+76 silly tarball no local data for instagram-url-direct@https://registry.npmjs.org/instagram-url-direct/-/instagram-url-direct-2.0.7.tgz. Extracting by manifest.
+77 silly tarball no local data for qs@https://registry.npmjs.org/qs/-/qs-6.15.3.tgz. Extracting by manifest.
+78 silly tarball no local data for side-channel-list@https://registry.npmjs.org/side-channel-list/-/side-channel-list-1.0.1.tgz. Extracting by manifest.
+79 silly tarball no local data for object-inspect@https://registry.npmjs.org/object-inspect/-/object-inspect-1.13.4.tgz. Extracting by manifest.
+80 http fetch GET 200 https://registry.npmjs.org/side-channel-map/-/side-channel-map-1.0.1.tgz 191ms (cache miss)
+81 http fetch GET 200 https://registry.npmjs.org/call-bound/-/call-bound-1.0.4.tgz 219ms (cache miss)
+82 http fetch GET 200 https://registry.npmjs.org/side-channel/-/side-channel-1.1.1.tgz 215ms (cache miss)
+83 http fetch POST 200 https://registry.npmjs.org/-/npm/v1/security/advisories/bulk 325ms
+84 silly audit report {
+84 silly audit report   'form-data': [
+84 silly audit report     {
+84 silly audit report       id: 1109540,
+84 silly audit report       url: 'https://github.com/advisories/GHSA-fjxv-7rqg-78g4',
+84 silly audit report       title: 'form-data uses unsafe random function in form-data for choosing boundary',
+84 silly audit report       severity: 'critical',
+84 silly audit report       vulnerable_versions: '<2.5.4',
+84 silly audit report       cwe: [Array],
+84 silly audit report       cvss: [Object]
+84 silly audit report     },
+84 silly audit report     {
+84 silly audit report       id: 1120745,
+84 silly audit report       url: 'https://github.com/advisories/GHSA-hmw2-7cc7-3qxx',
+84 silly audit report       title: 'form-data: CRLF injection in form-data via unescaped multipart field names and filenames',
+84 silly audit report       severity: 'high',
+84 silly audit report       vulnerable_versions: '<2.5.6',
+84 silly audit report       cwe: [Array],
+84 silly audit report       cvss: [Object]
+84 silly audit report     }
+84 silly audit report   ],
+84 silly audit report   minimatch: [
+84 silly audit report     {
+84 silly audit report       id: 1113459,
+84 silly audit report       url: 'https://github.com/advisories/GHSA-3ppc-4f35-3m26',
+84 silly audit report       title: 'minimatch has a ReDoS via repeated wildcards with non-matching literal in pattern',
+84 silly audit report       severity: 'high',
+84 silly audit report       vulnerable_versions: '<3.1.3',
+84 silly audit report       cwe: [Array],
+84 silly audit report       cvss: [Object]
+84 silly audit report     },
+84 silly audit report     {
+84 silly audit report       id: 1113538,
+84 silly audit report       url: 'https://github.com/advisories/GHSA-7r86-cg39-jmmj',
+84 silly audit report       title: 'minimatch has ReDoS: matchOne() combinatorial backtracking via multiple non-adjacent GLOBSTAR segments',
+84 silly audit report       severity: 'high',
+84 silly audit report       vulnerable_versions: '<3.1.3',
+84 silly audit report       cwe: [Array],
+84 silly audit report       cvss: [Object]
+84 silly audit report     },
+84 silly audit report     {
+84 silly audit report       id: 1113546,
+84 silly audit report       url: 'https://github.com/advisories/GHSA-23c5-xmqv-rm74',
+84 silly audit report       title: 'minimatch ReDoS: nested *() extglobs generate catastrophically backtracking regular expressions',
+84 silly audit report       severity: 'high',
+84 silly audit report       vulnerable_versions: '<3.1.4',
+84 silly audit report       cwe: [Array],
+84 silly audit report       cvss: [Object]
+84 silly audit report     }
+84 silly audit report   ],
+84 silly audit report   qs: [
+84 silly audit report     {
+84 silly audit report       id: 1113719,
+84 silly audit report       url: 'https://github.com/advisories/GHSA-6rw7-vpxm-498p',
+84 silly audit report       title: "qs's arrayLimit bypass in its bracket notation allows DoS via memory exhaustion",
+84 silly audit report       severity: 'moderate',
+84 silly audit report       vulnerable_versions: '<6.14.1',
+84 silly audit report       cwe: [Array],
+84 silly audit report       cvss: [Object]
+84 silly audit report     }
+84 silly audit report   ],
+84 silly audit report   request: [
+84 silly audit report     {
+84 silly audit report       id: 1096727,
+84 silly audit report       url: 'https://github.com/advisories/GHSA-p8p7-x288-28g6',
+84 silly audit report       title: 'Server-Side Request Forgery in Request',
+84 silly audit report       severity: 'moderate',
+84 silly audit report       vulnerable_versions: '<=2.88.2',
+84 silly audit report       cwe: [Array],
+84 silly audit report       cvss: [Object]
+84 silly audit report     }
+84 silly audit report   ],
+84 silly audit report   'tough-cookie': [
+84 silly audit report     {
+84 silly audit report       id: 1097682,
+84 silly audit report       url: 'https://github.com/advisories/GHSA-72xf-g2v4-qvf3',
+84 silly audit report       title: 'tough-cookie Prototype Pollution vulnerability',
+84 silly audit report       severity: 'moderate',
+84 silly audit report       vulnerable_versions: '<4.1.3',
+84 silly audit report       cwe: [Array],
+84 silly audit report       cvss: [Object]
+84 silly audit report     }
+84 silly audit report   ],
+84 silly audit report   uuid: [
+84 silly audit report     {
+84 silly audit report       id: 1119441,
+84 silly audit report       url: 'https://github.com/advisories/GHSA-w5hq-g745-h8pq',
+84 silly audit report       title: 'uuid: Missing buffer bounds check in v3/v5/v6 when buf is provided',
+84 silly audit report       severity: 'moderate',
+84 silly audit report       vulnerable_versions: '<11.1.1',
+84 silly audit report       cwe: [Array],
+84 silly audit report       cvss: [Object]
+84 silly audit report     }
+84 silly audit report   ]
+84 silly audit report }
+85 silly packumentCache corgi:https://registry.npmjs.org/form-data cache-miss
+86 silly packumentCache corgi:https://registry.npmjs.org/minimatch cache-miss
+87 silly packumentCache corgi:https://registry.npmjs.org/qs cache-miss
+88 silly packumentCache corgi:https://registry.npmjs.org/request cache-miss
+89 silly packumentCache corgi:https://registry.npmjs.org/tough-cookie cache-miss
+90 silly packumentCache corgi:https://registry.npmjs.org/uuid cache-miss
+91 http fetch GET 200 https://registry.npmjs.org/side-channel-weakmap/-/side-channel-weakmap-1.0.2.tgz 443ms (cache miss)
+92 http fetch GET 200 https://registry.npmjs.org/side-channel-list/-/side-channel-list-1.0.1.tgz 442ms (cache miss)
+93 http fetch GET 200 https://registry.npmjs.org/minimatch 193ms (cache revalidated)
+94 silly packumentCache corgi:https://registry.npmjs.org/minimatch set size:169442 disposed:false
+95 http fetch GET 200 https://registry.npmjs.org/request 218ms (cache revalidated)
+96 silly packumentCache corgi:https://registry.npmjs.org/request set size:129997 disposed:false
+97 http fetch GET 200 https://registry.npmjs.org/qs 228ms (cache revalidated)
+98 silly packumentCache corgi:https://registry.npmjs.org/qs set size:148003 disposed:false
+99 http fetch GET 200 https://registry.npmjs.org/uuid 229ms (cache revalidated)
+100 silly packumentCache corgi:https://registry.npmjs.org/uuid set size:82973 disposed:false
+101 http fetch GET 200 https://registry.npmjs.org/form-data 262ms (cache revalidated)
+102 silly packumentCache corgi:https://registry.npmjs.org/form-data set size:55002 disposed:false
+103 http fetch GET 200 https://registry.npmjs.org/instagram-url-direct/-/instagram-url-direct-2.0.7.tgz 567ms (cache miss)
+104 http fetch GET 200 https://registry.npmjs.org/qs/-/qs-6.15.3.tgz 574ms (cache miss)
+105 http fetch GET 200 https://registry.npmjs.org/object-inspect/-/object-inspect-1.13.4.tgz 584ms (cache miss)
+106 http fetch GET 200 https://registry.npmjs.org/tough-cookie 679ms (cache revalidated)
+107 silly packumentCache corgi:https://registry.npmjs.org/tough-cookie set size:57569 disposed:false
+108 silly packumentCache corgi:https://registry.npmjs.org/redstar cache-miss
+109 http fetch GET 200 https://registry.npmjs.org/redstar 309ms (cache revalidated)
+110 silly packumentCache corgi:https://registry.npmjs.org/redstar set size:1262 disposed:false
+111 silly packumentCache corgi:https://registry.npmjs.org/node-gtts cache-miss
+112 http fetch GET 200 https://registry.npmjs.org/node-gtts 347ms (cache revalidated)
+113 silly packumentCache corgi:https://registry.npmjs.org/node-gtts set size:4413 disposed:false
+114 silly packumentCache corgi:https://registry.npmjs.org/node-fzf cache-miss
+115 http fetch GET 200 https://registry.npmjs.org/node-fzf 75ms (cache revalidated)
+116 silly packumentCache corgi:https://registry.npmjs.org/node-fzf set size:42290 disposed:false
+117 silly packumentCache corgi:https://registry.npmjs.org/yt-search cache-miss
+118 http fetch GET 200 https://registry.npmjs.org/yt-search 85ms (cache revalidated)
+119 silly packumentCache corgi:https://registry.npmjs.org/yt-search set size:126336 disposed:false
+120 silly ADD node_modules/call-bound
+121 silly ADD node_modules/side-channel-weakmap
+122 silly ADD node_modules/side-channel-map
+123 silly ADD node_modules/side-channel-list
+124 silly ADD node_modules/object-inspect
+125 silly ADD node_modules/side-channel
+126 silly ADD node_modules/instagram-url-direct
+127 silly ADD node_modules/instagram-url-direct/node_modules/qs
+128 warn allow-scripts 2 packages have install scripts not yet covered by allowScripts:
+128 warn allow-scripts   @whiskeysockets/baileys@7.0.0-rc14 (preinstall: node ./engine-requirements.js)
+128 warn allow-scripts   protobufjs@7.6.5 (postinstall: node scripts/postinstall)
+128 warn allow-scripts
+128 warn allow-scripts Run `npm approve-scripts --allow-scripts-pending` to review, or `npm approve-scripts <pkg>` to allow.
+129 verbose cwd /data/data/com.termux/files/home
+130 verbose os Linux 4.19.157-perf+
+131 verbose node v26.3.1
+132 verbose npm  v11.17.0
+133 verbose exit 0
+134 info ok
