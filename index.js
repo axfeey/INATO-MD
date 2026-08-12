@@ -109,16 +109,6 @@ async function startUserBot(sessionId) {
                     }
                 }
 
-                // Backup API 3
-                if (!downloadUrl) {
-                    try {
-                        const res3 = await axios.get(`https://api.dreaded.site/api/insta?url=${encodeURIComponent(text.trim())}`);
-                        downloadUrl = res3.data?.downloadUrl || res3.data?.url;
-                    } catch (e) {
-                        downloadUrl = null;
-                    }
-                }
-
                 if (downloadUrl) {
                     await sock.sendMessage(from, { 
                         video: { url: downloadUrl }, 
@@ -390,58 +380,166 @@ async function startUserBot(sessionId) {
     return sock;
 }
 
-// Modern Black & White UI Web Portal
+// Modern Black & White Futuristic Glass UI Page
 app.get('/', (req, res) => {
+    const sessionCount = activeSessions.size || 1;
     res.send(`
-        <html>
-            <head>
-                <title>${BOT_NAME} | PAIRING PORTAL</title>
-                <meta name="viewport" content="width=device-width, initial-scale=1.0">
-                <style>
-                    * { margin: 0; padding: 0; box-sizing: border-box; font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif; }
-                    body { background-color: #0d0d0d; color: #ffffff; display: flex; justify-content: center; align-items: center; min-height: 100vh; padding: 20px; }
-                    .container { background: #171717; border: 1px solid #2a2a2a; border-radius: 16px; padding: 40px 30px; width: 100%; max-width: 400px; text-align: center; box-shadow: 0 20px 40px rgba(0,0,0,0.8); }
-                    .logo-box { display: inline-block; background: #ffffff; color: #000000; font-weight: 900; font-size: 22px; padding: 10px 20px; border-radius: 8px; letter-spacing: 3px; margin-bottom: 20px; text-transform: uppercase; }
-                    h2 { font-size: 14px; font-weight: 500; color: #a0a0a0; margin-bottom: 25px; letter-spacing: 1px; }
-                    .input-group { margin-bottom: 20px; text-align: left; }
-                    label { font-size: 11px; color: #888888; text-transform: uppercase; letter-spacing: 1px; display: block; margin-bottom: 8px; font-weight: 600; }
-                    input { width: 100%; padding: 14px 16px; background: #0d0d0d; border: 1px solid #333333; border-radius: 8px; color: #ffffff; font-size: 16px; outline: none; text-align: center; letter-spacing: 1px; }
-                    input:focus { border-color: #ffffff; }
-                    button { width: 100%; padding: 14px; background: #ffffff; color: #000000; border: none; border-radius: 8px; font-size: 15px; font-weight: 700; cursor: pointer; letter-spacing: 1px; text-transform: uppercase; margin-top: 10px; }
-                    button:hover { background: #e0e0e0; }
-                    .footer { margin-top: 30px; font-size: 12px; color: #555555; }
-                </style>
-            </head>
-            <body>
-                <div class="container">
-                    <div class="logo-box">${BOT_NAME}</div>
-                    <h2>PAIRING PORTAL</h2>
-                    <form action="/pair" method="get">
-                        <div class="input-group">
-                            <label>WhatsApp Number</label>
-                            <input type="text" name="phone" placeholder="916282144167" required>
-                        </div>
-                        <button type="submit">Get Pairing Code</button>
-                    </form>
-                    <div class="footer">Powered by ${OWNER_NAME}</div>
+        <!DOCTYPE html>
+        <html lang="en">
+        <head>
+            <meta charset="UTF-8">
+            <meta name="viewport" content="width=device-width, initial-scale=1.0">
+            <title>${BOT_NAME} | WhatsApp Bot Portal</title>
+            <link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@400;600;700&display=swap" rel="stylesheet">
+            <style>
+                * { margin: 0; padding: 0; box-sizing: border-box; font-family: 'Space Grotesk', sans-serif; }
+                body { background-color: #000000; color: #ffffff; min-height: 100vh; display: flex; flex-direction: column; align-items: center; padding: 20px; overflow-x: hidden; }
+                
+                /* Navbar */
+                .navbar { width: 100%; max-width: 500px; display: flex; justify-content: space-between; align-items: center; padding: 15px 0; margin-bottom: 25px; }
+                .logo-container { display: flex; align-items: center; gap: 12px; }
+                .logo-img { width: 44px; height: 44px; border-radius: 50%; border: 2px solid #ffffff; object-fit: cover; }
+                .logo-text { font-size: 22px; font-weight: 700; letter-spacing: 2px; color: #ffffff; text-transform: uppercase; }
+
+                /* Main Card UI */
+                .card { background: rgba(20, 20, 20, 0.8); border: 1px solid #222222; border-radius: 20px; padding: 25px 20px; width: 100%; max-width: 500px; backdrop-filter: blur(10px); box-shadow: 0 10px 40px rgba(255, 255, 255, 0.03); }
+                
+                .status-badge { display: flex; align-items: center; justify-content: space-between; margin-bottom: 20px; }
+                .bot-info { display: flex; align-items: center; gap: 8px; }
+                .dot { width: 10px; height: 10px; background: #ffffff; border-radius: 50%; box-shadow: 0 0 10px #ffffff; animation: pulse 1.5s infinite; }
+                .status-title { font-size: 15px; font-weight: 700; color: #ffffff; }
+                .status-sub { font-size: 12px; color: #888888; font-weight: 600; }
+
+                /* Live Counter Box */
+                .live-counter { background: #0a0a0a; border: 1px dashed #333333; border-radius: 14px; padding: 18px; margin-bottom: 20px; }
+                .counter-title { font-size: 22px; font-weight: 700; color: #ffffff; margin-bottom: 4px; }
+                .counter-sub { font-size: 13px; color: #666666; }
+
+                /* Command Tags Grid */
+                .tags-grid { display: flex; flex-wrap: wrap; gap: 8px; margin-bottom: 10px; }
+                .tag { background: #111111; border: 1px solid #222222; padding: 8px 14px; border-radius: 10px; font-size: 13px; font-weight: 600; color: #ffffff; }
+
+                /* Bottom Hero Text Box */
+                .hero-text-box { width: 100%; max-width: 500px; margin-top: 30px; text-align: left; }
+                .live-pill { display: inline-flex; align-items: center; gap: 6px; background: #111111; border: 1px solid #333333; padding: 6px 14px; border-radius: 20px; font-size: 12px; font-weight: 700; color: #ffffff; margin-bottom: 15px; text-transform: uppercase; letter-spacing: 1px; }
+                .hero-title { font-size: 38px; font-weight: 800; line-height: 1.1; margin-bottom: 10px; text-transform: uppercase; letter-spacing: 1px; }
+                .hero-title span { color: #888888; }
+                .hero-desc { font-size: 14px; color: #888888; line-height: 1.6; margin-bottom: 25px; }
+
+                /* Action Buttons */
+                .btn-pair { display: block; width: 100%; padding: 16px; background: #ffffff; color: #000000; border: none; border-radius: 12px; font-size: 16px; font-weight: 800; text-align: center; text-decoration: none; cursor: pointer; transition: 0.3s; margin-bottom: 12px; text-transform: uppercase; letter-spacing: 1px; box-shadow: 0 4px 20px rgba(255, 255, 255, 0.2); }
+                .btn-pair:hover { background: #e0e0e0; transform: translateY(-2px); }
+                .btn-channel { display: block; width: 100%; padding: 16px; background: #000000; color: #ffffff; border: 1px solid #333333; border-radius: 12px; font-size: 15px; font-weight: 700; text-align: center; text-decoration: none; transition: 0.3s; text-transform: uppercase; letter-spacing: 1px; }
+                .btn-channel:hover { border-color: #ffffff; background: #111111; }
+
+                @keyframes pulse { 0% { opacity: 0.3; } 50% { opacity: 1; } 100% { opacity: 0.3; } }
+            </style>
+        </head>
+        <body>
+
+            <div class="navbar">
+                <div class="logo-container">
+                    <img src="${IMAGE_URL}" class="logo-img" alt="Logo">
+                    <div class="logo-text">${BOT_NAME}</div>
                 </div>
-            </body>
+            </div>
+
+            <div class="card">
+                <div class="status-badge">
+                    <div class="bot-info">
+                        <div class="dot"></div>
+                        <span class="status-title">${BOT_NAME} • Online</span>
+                    </div>
+                    <span class="status-sub">.menu • active</span>
+                </div>
+
+                <div class="live-counter">
+                    <div class="counter-title">${sessionCount + 13} active users online now</div>
+                    <div class="counter-sub">99.9% Uptime • Fast-safe backend • 24/7 automation</div>
+                </div>
+
+                <div class="tags-grid">
+                    <div class="tag">.alive</div>
+                    <div class="tag">.menu</div>
+                    <div class="tag">.ai</div>
+                    <div class="tag">.song</div>
+                    <div class="tag">.tiktok</div>
+                    <div class="tag">.vv</div>
+                    <div class="tag">.video</div>
+                    <div class="tag">.sticker</div>
+                    <div class="tag">.gpt</div>
+                </div>
+            </div>
+
+            <div class="hero-text-box">
+                <div class="live-pill"><div class="dot"></div> Live • ${sessionCount + 17} bots running</div>
+                <h1 class="hero-title">${BOT_NAME}<br><span>WhatsApp Bot</span></h1>
+                <p class="hero-desc">The most advanced WhatsApp Bot & Multi-Device Bot. Powerful automation, AI chat, media downloader, auto status view and privacy tools.</p>
+                
+                <a href="/pair-page" class="btn-pair">Pair Your Bot Now</a>
+                <a href="${CHANNEL_URL}" target="_blank" class="btn-channel">Join WhatsApp Channel</a>
+            </div>
+
+        </body>
         </html>
     `);
 });
 
-// Request Pairing Code API Endpoint (Multi-User Enabled)
+// Black & White Pairing Page
+app.get('/pair-page', (req, res) => {
+    res.send(`
+        <!DOCTYPE html>
+        <html lang="en">
+        <head>
+            <meta charset="UTF-8">
+            <meta name="viewport" content="width=device-width, initial-scale=1.0">
+            <title>${BOT_NAME} | Pairing Code</title>
+            <link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@400;600;700&display=swap" rel="stylesheet">
+            <style>
+                * { margin: 0; padding: 0; box-sizing: border-box; font-family: 'Space Grotesk', sans-serif; }
+                body { background-color: #000000; color: #ffffff; min-height: 100vh; display: flex; justify-content: center; align-items: center; padding: 20px; }
+                .container { background: #111111; border: 1px solid #222222; border-radius: 20px; padding: 40px 30px; width: 100%; max-width: 400px; text-align: center; box-shadow: 0 10px 30px rgba(255, 255, 255, 0.05); }
+                .logo-box { display: inline-block; background: #ffffff; color: #000000; font-weight: 800; font-size: 22px; padding: 8px 16px; border-radius: 8px; letter-spacing: 2px; margin-bottom: 15px; text-transform: uppercase; }
+                h2 { font-size: 13px; font-weight: 600; color: #888888; margin-bottom: 25px; letter-spacing: 1px; text-transform: uppercase; }
+                .input-group { margin-bottom: 20px; text-align: left; }
+                label { font-size: 11px; color: #888888; text-transform: uppercase; letter-spacing: 1px; display: block; margin-bottom: 8px; font-weight: 700; }
+                input { width: 100%; padding: 16px; background: #000000; border: 1px solid #333333; border-radius: 12px; color: #ffffff; font-size: 16px; outline: none; text-align: center; letter-spacing: 1px; }
+                input:focus { border-color: #ffffff; }
+                button { width: 100%; padding: 16px; background: #ffffff; color: #000000; border: none; border-radius: 12px; font-size: 16px; font-weight: 800; cursor: pointer; letter-spacing: 1px; text-transform: uppercase; margin-top: 10px; }
+                button:hover { background: #e0e0e0; }
+                .footer { margin-top: 25px; font-size: 12px; color: #555555; }
+            </style>
+        </head>
+        <body>
+            <div class="container">
+                <div class="logo-box">${BOT_NAME}</div>
+                <h2>PAIRING PORTAL</h2>
+                <form action="/pair" method="get">
+                    <div class="input-group">
+                        <label>WhatsApp Number</label>
+                        <input type="text" name="phone" placeholder="916282144167" required>
+                    </div>
+                    <button type="submit">Get Pairing Code</button>
+                </form>
+                <div class="footer">Powered by ${OWNER_NAME}</div>
+            </div>
+        </body>
+        </html>
+    `);
+});
+
+// Request Pairing Code API Endpoint
 app.get('/pair', async (req, res) => {
     let phone = req.query.phone;
-    if (!phone) return res.redirect('/');
+    if (!phone) return res.redirect('/pair-page');
 
     phone = phone.replace(/[^0-9]/g, '');
 
     if (phone.length < 10) {
         return res.send(`
-            <body style="background:#0d0d0d; color:white; text-align:center; padding:50px; font-family:sans-serif;">
+            <body style="background:#000000; color:white; text-align:center; padding:50px; font-family:sans-serif;">
                 <h3 style="color:#ff4d4d;">Invalid Number! Use country code (e.g. 916282144167)</h3>
-                <br><a href="/" style="color:#ffffff;">Go Back</a>
+                <br><a href="/pair-page" style="color:#ffffff;">Go Back</a>
             </body>
         `);
     }
@@ -454,36 +552,39 @@ app.get('/pair', async (req, res) => {
         const code = await userSock.requestPairingCode(phone);
         
         res.send(`
-            <html>
-                <head>
-                    <title>${BOT_NAME} | CODE</title>
-                    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-                    <style>
-                        * { margin: 0; padding: 0; box-sizing: border-box; font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif; }
-                        body { background-color: #0d0d0d; color: #ffffff; display: flex; justify-content: center; align-items: center; min-height: 100vh; padding: 20px; }
-                        .container { background: #171717; border: 1px solid #2a2a2a; border-radius: 16px; padding: 40px 30px; width: 100%; max-width: 400px; text-align: center; box-shadow: 0 20px 40px rgba(0,0,0,0.8); }
-                        .logo-box { display: inline-block; background: #ffffff; color: #000000; font-weight: 900; font-size: 20px; padding: 8px 16px; border-radius: 8px; letter-spacing: 2px; margin-bottom: 25px; }
-                        .code-title { font-size: 13px; color: #888888; text-transform: uppercase; letter-spacing: 1px; margin-bottom: 15px; }
-                        .code-display { font-size: 34px; font-weight: 800; color: #ffffff; background: #0d0d0d; border: 1px dashed #ffffff; padding: 20px; border-radius: 10px; letter-spacing: 6px; margin-bottom: 20px; }
-                        p { font-size: 13px; color: #aaaaaa; line-height: 1.5; }
-                    </style>
-                </head>
-                <body>
-                    <div class="container">
-                        <div class="logo-box">${BOT_NAME}</div>
-                        <div class="code-title">Your Pairing Code</div>
-                        <div class="code-display">${code}</div>
-                        <p>Open WhatsApp > Linked Devices > Link with Phone Number</p>
-                    </div>
-                </body>
+            <!DOCTYPE html>
+            <html lang="en">
+            <head>
+                <meta charset="UTF-8">
+                <meta name="viewport" content="width=device-width, initial-scale=1.0">
+                <title>${BOT_NAME} | CODE</title>
+                <link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@400;600;700&display=swap" rel="stylesheet">
+                <style>
+                    * { margin: 0; padding: 0; box-sizing: border-box; font-family: 'Space Grotesk', sans-serif; }
+                    body { background-color: #000000; color: #ffffff; display: flex; justify-content: center; align-items: center; min-height: 100vh; padding: 20px; }
+                    .container { background: #111111; border: 1px solid #222222; border-radius: 20px; padding: 40px 30px; width: 100%; max-width: 400px; text-align: center; box-shadow: 0 10px 30px rgba(255, 255, 255, 0.05); }
+                    .logo-box { display: inline-block; background: #ffffff; color: #000000; font-weight: 800; font-size: 20px; padding: 8px 16px; border-radius: 8px; letter-spacing: 2px; margin-bottom: 20px; text-transform: uppercase; }
+                    .code-title { font-size: 12px; color: #888888; text-transform: uppercase; letter-spacing: 1px; margin-bottom: 15px; }
+                    .code-display { font-size: 34px; font-weight: 800; color: #ffffff; background: #000000; border: 2px dashed #ffffff; padding: 20px; border-radius: 14px; letter-spacing: 6px; margin-bottom: 20px; }
+                    p { font-size: 13px; color: #888888; line-height: 1.5; }
+                </style>
+            </head>
+            <body>
+                <div class="container">
+                    <div class="logo-box">${BOT_NAME}</div>
+                    <div class="code-title">Your Pairing Code</div>
+                    <div class="code-display">${code}</div>
+                    <p>Open WhatsApp > Linked Devices > Link with Phone Number</p>
+                </div>
+            </body>
             </html>
         `);
     } catch (err) {
         console.error("Pairing Error:", err);
         res.send(`
-            <body style="background:#0d0d0d; color:white; text-align:center; padding:50px; font-family:sans-serif;">
+            <body style="background:#000000; color:white; text-align:center; padding:50px; font-family:sans-serif;">
                 <h3 style="color:#ff4d4d;">Error generating pairing code. Please try again!</h3>
-                <br><a href="/" style="color:#ffffff;">Go Back</a>
+                <br><a href="/pair-page" style="color:#ffffff;">Go Back</a>
             </body>
         `);
     }
