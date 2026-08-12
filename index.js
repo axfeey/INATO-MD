@@ -6,6 +6,7 @@ const fs = require('fs');
 const { exec } = require('child_process');
 const axios = require('axios');
 const pino = require('pino');
+const express = require('express');
 
 const BOT_NAME = "INATO-MD";
 const OWNER_NAME = "axfeey";
@@ -15,11 +16,92 @@ const SUDO_USERS = [OWNER_NUMBER + "@s.whatsapp.net"];
 
 let botMode = "public";
 let handlerPrefix = ".";
+let sock;
+
+// Web Express Server Setup for Web Pairing
+const app = express();
+const PORT = process.env.PORT || 3000;
+
+app.use(express.json());
+app.use(express.urlencoded({ extended: true }));
+
+app.get('/', (req, res) => {
+    res.send(`
+        <html>
+            <head>
+                <title>${BOT_NAME} Pairing Portal</title>
+                <meta name="viewport" content="width=device-width, initial-scale=1.0">
+                <style>
+                    body { font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif; background-color: #121212; color: #ffffff; text-align: center; padding: 40px 10px; }
+                    .card { background-color: #1e1e1e; max-width: 400px; margin: 0 auto; padding: 25px; border-radius: 12px; box-shadow: 0 4px 15px rgba(0,0,0,0.5); }
+                    h2 { color: #25D366; }
+                    input { width: 90%; padding: 12px; margin: 15px 0; border: 1px solid #333; border-radius: 6px; background: #2a2a2a; color: #fff; font-size: 16px; text-align: center; }
+                    button { width: 95%; padding: 12px; background-color: #25D366; color: white; border: none; border-radius: 6px; font-size: 16px; font-weight: bold; cursor: pointer; }
+                    button:hover { background-color: #1ebd56; }
+                </style>
+            </head>
+            <body>
+                <div class="card">
+                    <h2>🤖 ${BOT_NAME}</h2>
+                    <p>Enter your WhatsApp Number with Country Code:</p>
+                    <form action="/pair" method="get">
+                        <input type="text" name="phone" placeholder="e.g. 916282144167" required><br>
+                        <button type="submit">Get Pairing Code</button>
+                    </form>
+                </div>
+            </body>
+        </html>
+    `);
+});
+
+app.get('/pair', async (req, res) => {
+    let phone = req.query.phone;
+    if (!phone) return res.redirect('/');
+
+    phone = phone.replace(/[^0-9]/g, '');
+
+    try {
+        if (!sock) {
+            return res.send(`<h3>Bot is starting up... Please refresh in a few seconds.</h3>`);
+        }
+        
+        const code = await sock.requestPairingCode(phone);
+        res.send(`
+            <html>
+                <head>
+                    <title>${BOT_NAME} Pairing Code</title>
+                    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+                    <style>
+                        body { font-family: sans-serif; background: #121212; color: white; text-align: center; padding: 50px 10px; }
+                        .code-box { background: #1e1e1e; display: inline-block; padding: 20px 40px; border-radius: 10px; border: 2px solid #25D366; }
+                        h1 { color: #25D366; font-size: 38px; letter-spacing: 4px; margin: 10px 0; }
+                    </style>
+                </head>
+                <body>
+                    <div class="code-box">
+                        <p>Your Pairing Code for <b>${phone}</b>:</p>
+                        <h1>${code}</h1>
+                        <p>Open WhatsApp > Linked Devices > Link with Phone Number</p>
+                    </div>
+                </body>
+            </html>
+        `);
+    } catch (err) {
+        res.send(`<body style="background:#121212; color:white; text-align:center; padding:50px;">
+            <h3 style="color:red;">Error requesting code. Make sure phone number is correct!</h3>
+            <a href="/" style="color:#25D366;">Go Back</a>
+        </body>`);
+    }
+});
+
+app.listen(PORT, () => {
+    console.log(`🌐 Web Portal running on port ${PORT}`);
+});
 
 async function connectToWhatsApp() {
     const { state, saveCreds } = await useMultiFileAuthState('auth_info_baileys');
     
-    const sock = makeWASocket({ 
+    sock = makeWASocket({ 
         auth: state, 
         printQRInTerminal: true,
         logger: pino({ level: 'silent' }),
