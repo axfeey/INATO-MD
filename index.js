@@ -73,25 +73,28 @@ async function startWhatsAppBot() {
 
         const text = msg.message.conversation || msg.message.extendedTextMessage?.text || "";
 
-        // Auto Downloader for Links
+        // Auto Downloader for Links using Direct API
         if (text.includes("instagram.com") || text.includes("facebook.com") || text.includes("fb.watch") || text.includes("youtu.be") || text.includes("youtube.com")) {
             await sock.sendMessage(from, { text: '📥 *Downloading media...*' }, { quoted: msg });
             
-            const fileName = `./temp_${Date.now()}.mp4`;
-            const cmd = `yt-dlp -o "${fileName}" -f "b[ext=mp4]/b" "${text.trim()}"`;
-
-            exec(cmd, async (error) => {
-                if (error || !fs.existsSync(fileName)) {
-                    return sock.sendMessage(from, { text: '❌ Download failed!' }, { quoted: msg });
-                }
-
-                await sock.sendMessage(from, { 
-                    video: fs.readFileSync(fileName), 
-                    caption: `✨ Downloaded by *${BOT_NAME}*\n👑 Owner: *${OWNER_NAME}*`
-                }, { quoted: msg });
+            try {
+                const dlUrl = `https://api.vreden.my.id/api/downloadall?url=${encodeURIComponent(text.trim())}`;
+                const res = await axios.get(dlUrl);
                 
-                if (fs.existsSync(fileName)) fs.unlinkSync(fileName);
-            });
+                const mediaUrl = res.data?.result?.url || res.data?.result?.downloadUrl || res.data?.result?.[0]?.url;
+
+                if (mediaUrl) {
+                    await sock.sendMessage(from, { 
+                        video: { url: mediaUrl }, 
+                        caption: `✨ Downloaded by *${BOT_NAME}*\n👑 Owner: *${OWNER_NAME}*`
+                    }, { quoted: msg });
+                } else {
+                    throw new Error("API Media URL Not Found");
+                }
+            } catch (error) {
+                console.error("Download Error:", error);
+                await sock.sendMessage(from, { text: '❌ ഡൗൺലോഡ് ചെയ്യാൻ കഴിഞ്ഞില്ല!' }, { quoted: msg });
+            }
             return;
         }
 
@@ -234,15 +237,16 @@ async function startWhatsAppBot() {
                 
                 const vid = searchVid.videos[0];
                 await sock.sendMessage(from, { text: `🎥 Downloading: *${vid.title}*` }, { quoted: msg });
-                
-                const vidFile = `./temp_vid_${Date.now()}.mp4`;
-                const vidCmd = `yt-dlp -o "${vidFile}" -f "b[ext=mp4]/b" "${vid.url}"`;
 
-                exec(vidCmd, async (err) => {
-                    if (err || !fs.existsSync(vidFile)) return sock.sendMessage(from, { text: '❌ Video download failed!' }, { quoted: msg });
-                    await sock.sendMessage(from, { video: fs.readFileSync(vidFile), caption: `🎥 *${vid.title}*\nBot: *${BOT_NAME}*` }, { quoted: msg });
-                    if (fs.existsSync(vidFile)) fs.unlinkSync(vidFile);
-                });
+                try {
+                    const res = await axios.get(`https://api.vreden.my.id/api/downloadall?url=${encodeURIComponent(vid.url)}`);
+                    const downloadUrl = res.data?.result?.url || res.data?.result?.downloadUrl;
+                    if (downloadUrl) {
+                        await sock.sendMessage(from, { video: { url: downloadUrl }, caption: `🎥 *${vid.title}*\nBot: *${BOT_NAME}*` }, { quoted: msg });
+                    } else { throw new Error(); }
+                } catch (e) {
+                    await sock.sendMessage(from, { text: '❌ Video download failed!' }, { quoted: msg });
+                }
                 break;
 
             case 'tts':
