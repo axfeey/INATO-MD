@@ -73,27 +73,52 @@ async function startWhatsAppBot() {
 
         const text = msg.message.conversation || msg.message.extendedTextMessage?.text || "";
 
-        // Auto Downloader for Links using Direct API
-        if (text.includes("instagram.com") || text.includes("facebook.com") || text.includes("fb.watch") || text.includes("youtu.be") || text.includes("youtube.com")) {
+        // Multi-API Auto Downloader for Links (Instagram, FB, YT, TikTok)
+        if (text.includes("instagram.com") || text.includes("facebook.com") || text.includes("fb.watch") || text.includes("youtu.be") || text.includes("youtube.com") || text.includes("tiktok.com")) {
             await sock.sendMessage(from, { text: '📥 *Downloading media...*' }, { quoted: msg });
             
             try {
-                const dlUrl = `https://api.vreden.my.id/api/downloadall?url=${encodeURIComponent(text.trim())}`;
-                const res = await axios.get(dlUrl);
-                
-                const mediaUrl = res.data?.result?.url || res.data?.result?.downloadUrl || res.data?.result?.[0]?.url;
+                let downloadUrl = null;
 
-                if (mediaUrl) {
+                // API 1
+                try {
+                    const res1 = await axios.get(`https://api.vreden.web.id/api/downloadall?url=${encodeURIComponent(text.trim())}`);
+                    downloadUrl = res1.data?.result?.url || res1.data?.result?.downloadUrl || res1.data?.result?.[0]?.url;
+                } catch (e) {
+                    downloadUrl = null;
+                }
+
+                // Backup API 2
+                if (!downloadUrl) {
+                    try {
+                        const res2 = await axios.get(`https://api.agatz.xyz/api/instagram?url=${encodeURIComponent(text.trim())}`);
+                        downloadUrl = res2.data?.data?.[0]?.url || res2.data?.data?.url;
+                    } catch (e) {
+                        downloadUrl = null;
+                    }
+                }
+
+                // Backup API 3
+                if (!downloadUrl) {
+                    try {
+                        const res3 = await axios.get(`https://api.dreaded.site/api/insta?url=${encodeURIComponent(text.trim())}`);
+                        downloadUrl = res3.data?.downloadUrl || res3.data?.url;
+                    } catch (e) {
+                        downloadUrl = null;
+                    }
+                }
+
+                if (downloadUrl) {
                     await sock.sendMessage(from, { 
-                        video: { url: mediaUrl }, 
+                        video: { url: downloadUrl }, 
                         caption: `✨ Downloaded by *${BOT_NAME}*\n👑 Owner: *${OWNER_NAME}*`
                     }, { quoted: msg });
                 } else {
-                    throw new Error("API Media URL Not Found");
+                    throw new Error("All download APIs failed");
                 }
             } catch (error) {
                 console.error("Download Error:", error);
-                await sock.sendMessage(from, { text: '❌ ഡൗൺലോഡ് ചെയ്യാൻ കഴിഞ്ഞില്ല!' }, { quoted: msg });
+                await sock.sendMessage(from, { text: '❌ ഡൗൺലോഡ് ചെയ്യാൻ കഴിഞ്ഞില്ല! ലിങ്ക് പ്രൈവറ്റ് ആണോ എന്ന് പരിശോധിക്കുക.' }, { quoted: msg });
             }
             return;
         }
