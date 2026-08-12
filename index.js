@@ -7,6 +7,7 @@ const { exec } = require('child_process');
 const axios = require('axios');
 const pino = require('pino');
 const express = require('express');
+const path = require('path');
 
 const BOT_NAME = "INATO-MD";
 const OWNER_NAME = "axfeey";
@@ -17,7 +18,9 @@ const SUDO_USERS = [OWNER_NUMBER + "@s.whatsapp.net"];
 
 let botMode = "public";
 let handlerPrefix = ".";
-let sock = null;
+
+// Multi-Session Active Connections Store
+const activeSessions = new Map();
 
 const app = express();
 const PORT = process.env.PORT || 3000;
@@ -25,11 +28,12 @@ const PORT = process.env.PORT || 3000;
 app.use(express.json());
 app.use(express.urlencoded({ extended: true }));
 
-// WhatsApp Socket Connection Setup
-async function startWhatsAppBot() {
-    const { state, saveCreds } = await useMultiFileAuthState('auth_info_baileys');
+// WhatsApp Socket Connection Setup (Multi-Session Enabled)
+async function startUserBot(sessionId) {
+    const sessionFolder = path.join(__dirname, 'sessions', `session_${sessionId}`);
+    const { state, saveCreds } = await useMultiFileAuthState(sessionFolder);
     
-    sock = makeWASocket({ 
+    const sock = makeWASocket({ 
         auth: state, 
         printQRInTerminal: false,
         logger: pino({ level: 'silent' }),
@@ -37,6 +41,8 @@ async function startWhatsAppBot() {
         markOnlineOnConnect: true,
         browser: ["Ubuntu", "Chrome", "20.0.04"]
     });
+
+    activeSessions.set(sessionId, sock);
 
     sock.ev.on('creds.update', saveCreds);
 
@@ -46,10 +52,15 @@ async function startWhatsAppBot() {
         if (connection === 'close') {
             const reason = lastDisconnect?.error?.output?.statusCode;
             if (reason !== DisconnectReason.loggedOut && reason !== 428) {
-                startWhatsAppBot();
+                startUserBot(sessionId);
+            } else {
+                activeSessions.delete(sessionId);
+                if (fs.existsSync(sessionFolder)) {
+                    fs.rmSync(sessionFolder, { recursive: true, force: true });
+                }
             }
         } else if (connection === 'open') {
-            console.log(`✅ ${BOT_NAME} Connected & Active Successfully!`);
+            console.log(`✅ ${BOT_NAME} Session Active: ${sessionId}`);
         }
     });
 
@@ -419,7 +430,7 @@ app.get('/', (req, res) => {
     `);
 });
 
-// Request Pairing Code API Endpoint
+// Request Pairing Code API Endpoint (Multi-User Enabled)
 app.get('/pair', async (req, res) => {
     let phone = req.query.phone;
     if (!phone) return res.redirect('/');
@@ -436,15 +447,11 @@ app.get('/pair', async (req, res) => {
     }
 
     try {
-        if (fs.existsSync('auth_info_baileys')) {
-            fs.rmSync('auth_info_baileys', { recursive: true, force: true });
-        }
-
-        const activeSock = await startWhatsAppBot();
+        const userSock = await startUserBot(phone);
         
         await new Promise(resolve => setTimeout(resolve, 3000));
 
-        const code = await activeSock.requestPairingCode(phone);
+        const code = await userSock.requestPairingCode(phone);
         
         res.send(`
             <html>
@@ -482,9 +489,17 @@ app.get('/pair', async (req, res) => {
     }
 });
 
+// Auto Load All Saved Sessions on Restart
 app.listen(PORT, () => {
-    console.log(`🌐 Web Portal live on port ${PORT}`);
-    if (fs.existsSync('auth_info_baileys/creds.json')) {
-        startWhatsAppBot();
+    console.log(`🌐 Multi-Session Web Portal active on port ${PORT}`);
+    const sessionsDir = path.join(__dirname, 'sessions');
+    if (fs.existsSync(sessionsDir)) {
+        const folders = fs.readdirSync(sessionsDir);
+        folders.forEach(folder => {
+            if (folder.startsWith('session_')) {
+                const sessionId = folder.replace('session_', '');
+                startUserBot(sessionId);
+            }
+        });
     }
 });
