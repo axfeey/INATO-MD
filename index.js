@@ -5,6 +5,7 @@ const googleTTS = require('google-tts-api');
 const fs = require('fs');
 const { exec } = require('child_process');
 const axios = require('axios');
+const pino = require('pino');
 
 const BOT_NAME = "INATO-MD";
 const OWNER_NAME = "axfeey";
@@ -20,7 +21,10 @@ async function connectToWhatsApp() {
     
     const sock = makeWASocket({ 
         auth: state, 
-        printQRInTerminal: true 
+        printQRInTerminal: true,
+        logger: pino({ level: 'silent' }),
+        syncFullHistory: false,
+        markOnlineOnConnect: false
     });
 
     sock.ev.on('creds.update', saveCreds);
@@ -49,7 +53,7 @@ async function connectToWhatsApp() {
         const sender = msg.key.participant || from;
         const isOwner = SUDO_USERS.includes(sender) || msg.key.fromMe;
 
-        // Auto Status View & Reaction
+        // Auto Status View
         if (from === 'status@broadcast') {
             await sock.readMessages([msg.key]);
             const reactions = ['💚', '✨', '🔥', '💯', '👍', '❤️'];
@@ -60,21 +64,21 @@ async function connectToWhatsApp() {
 
         const text = msg.message.conversation || msg.message.extendedTextMessage?.text || "";
 
-        // Auto Download Links using yt-dlp
+        // Auto Downloader for Links
         if (text.includes("instagram.com") || text.includes("facebook.com") || text.includes("fb.watch") || text.includes("youtu.be") || text.includes("youtube.com")) {
-            await sock.sendMessage(from, { text: '│ 📥 *Downloading media...*' }, { quoted: msg });
+            await sock.sendMessage(from, { text: '📥 *Downloading media...*' }, { quoted: msg });
             
             const fileName = `./temp_${Date.now()}.mp4`;
             const cmd = `yt-dlp -o "${fileName}" -f "b[ext=mp4]/b" "${text.trim()}"`;
 
             exec(cmd, async (error) => {
                 if (error || !fs.existsSync(fileName)) {
-                    return sock.sendMessage(from, { text: '│ ❌ ഡൗൺലോഡ് ചെയ്യാൻ കഴിഞ്ഞില്ല!' }, { quoted: msg });
+                    return sock.sendMessage(from, { text: '❌ Download failed!' }, { quoted: msg });
                 }
 
                 await sock.sendMessage(from, { 
                     video: fs.readFileSync(fileName), 
-                    caption: `│ Downloaded by *${BOT_NAME}*\n│ Owner: *${OWNER_NAME}*`
+                    caption: `✨ Downloaded by *${BOT_NAME}*\n👑 Owner: *${OWNER_NAME}*`
                 }, { quoted: msg });
                 
                 if (fs.existsSync(fileName)) fs.unlinkSync(fileName);
@@ -91,160 +95,244 @@ async function connectToWhatsApp() {
 
         switch (cmd) {
             case 'ping':
+            case 'speed':
                 const start = Date.now();
-                await sock.sendMessage(from, { text: '│ ⚡ *Checking latency...*' }, { quoted: msg });
+                const initMsg = await sock.sendMessage(from, { text: '⚡ *Testing Speed...*' }, { quoted: msg });
                 const end = Date.now();
                 
-                const pingText = `┌───〔 🏓 *BOT SPEED* 〕
-│
-│ 🚀 *Latency:* ${end - start} ms
-│ 🤖 *Bot:* ${BOT_NAME}
-│ 🌐 *Mode:* ${botMode}
-│ 👑 *Owner:* ${OWNER_NAME}
-│
-└───〔 *${BOT_NAME}* 〕`;
-                await sock.sendMessage(from, { text: pingText }, { quoted: msg });
+                const pingText = `╭━━━❮ *${BOT_NAME} SPEED* ❯━━━╮
+┃
+┃ 🚀 *Response Speed:* \`${end - start} ms\`
+┃ 🤖 *Status:* \`Active & Online\`
+┃ 🌐 *Mode:* \`${botMode}\`
+┃ 👑 *Owner:* \`${OWNER_NAME}\`
+┃
+╰━━━━━━━━━━━━━━━━━━╯`;
+                await sock.sendMessage(from, { text: pingText, edit: initMsg.key });
                 break;
 
             case 'menu':
+            case 'help':
             case 'list':
-            case 'info':
             case 'alive':
-                const menuText = `┌───〔 🤖 *${BOT_NAME}* 〕
-│
-│ 👤 *Owner:* ${OWNER_NAME}
-│ 📞 *Contact:* ${OWNER_NUMBER}
-│ 🌐 *Mode:* ${botMode}
-│ ⚙️ *Prefix:* [ ${handlerPrefix} ]
-│
-├───〔 📌 *ALL COMMANDS* 〕
-│
-│ 🛠️ ${handlerPrefix}info       │ 📜 ${handlerPrefix}menu
-│ 🏓 ${handlerPrefix}ping       │ 🔒 ${handlerPrefix}mode
-│ 🎵 ${handlerPrefix}song       │ 🎶 ${handlerPrefix}mp3
-│ 🎥 ${handlerPrefix}video      │ 🗣️ ${handlerPrefix}tts
-│ 🎨 ${handlerPrefix}sticker    │ 🏷️ ${handlerPrefix}tagall
-│
-└───〔 ✦ *${BOT_NAME}* ✦ 〕`;
+                const fullMenuText = `╔═════════════════════════╗
+   🤖 *${BOT_NAME}*
+   ✨ *Version:* 3.0.7
+   👑 *Owner:* ${OWNER_NAME}
+   🌐 *Mode:* ${botMode}
+╚═════════════════════════╝
 
-                await sock.sendMessage(from, { image: { url: IMAGE_URL }, caption: menuText }, { quoted: msg });
+┌───〔 🌐 *GENERAL COMMANDS* 〕───
+│ ❯ .help | .menu
+│ ❯ .ping | .alive
+│ ❯ .tts <text> | .owner
+│ ❯ .joke | .quote | .fact
+│ ❯ .weather <city> | .news
+│ ❯ .lyrics <song>
+│ ❯ .groupinfo | .admins
+│ ❯ .jid | .url
+└─────────────────────────
+
+┌───〔 👮‍♂️ *ADMIN COMMANDS* 〕───
+│ ❯ .kick @user | .ban @user
+│ ❯ .promote @user | .demote @user
+│ ❯ .mute | .unmute
+│ ❯ .delete
+│ ❯ .tagall | .hidetag <msg>
+│ ❯ .setgdesc <text> | .setgname <text>
+└─────────────────────────
+
+┌───〔 🔒 *OWNER COMMANDS* 〕───
+│ ❯ .mode <public/private>
+│ ❯ .clearsession | .cleartmp
+│ ❯ .restart | .setpp
+└─────────────────────────
+
+┌───〔 🎨 *MEDIA & STICKER* 〕───
+│ ❯ .sticker | .s (reply image)
+│ ❯ .take <packname>
+│ ❯ .removebg (reply image)
+└─────────────────────────
+
+┌───〔 🤖 *AI COMMANDS* 〕───
+│ ❯ .gpt <question> | .gemini <question>
+│ ❯ .imagine <prompt>
+└─────────────────────────
+
+┌───〔 📥 *DOWNLOADER* 〕───
+│ ❯ .play <song> | .song <song>
+│ ❯ .video <name> | .ytmp4 <link>
+│ ❯ .instagram <link> | .facebook <link>
+└─────────────────────────
+
+┌───〔 💻 *GITHUB COMMANDS* 〕───
+│ ❯ .git | .github | .repo | .sc
+└─────────────────────────`;
+
+                await sock.sendMessage(from, { image: { url: IMAGE_URL }, caption: fullMenuText }, { quoted: msg });
+                break;
+
+            case 'owner':
+                await sock.sendMessage(from, { text: `👑 *Owner:* ${OWNER_NAME}\n📞 *Number:* https://wa.me/${OWNER_NUMBER}` }, { quoted: msg });
+                break;
+
+            case 'sticker':
+            case 's':
+                const quotedMsg = msg.message.extendedTextMessage?.contextInfo?.quotedMessage;
+                const targetMedia = quotedMsg || msg.message;
+                const type = targetMedia?.imageMessage ? 'image' : targetMedia?.videoMessage ? 'video' : null;
+
+                if (!type) return sock.sendMessage(from, { text: '❌ Reply to an image/video with *.sticker*' }, { quoted: msg });
+
+                try {
+                    const stream = await downloadContentFromMessage(targetMedia[`${type}Message`], type);
+                    let buffer = Buffer.from([]);
+                    for await (const chunk of stream) buffer = Buffer.concat([buffer, chunk]);
+                    await sock.sendMessage(from, { sticker: buffer }, { quoted: msg });
+                } catch (e) {
+                    await sock.sendMessage(from, { text: '❌ Failed to create sticker!' }, { quoted: msg });
+                }
                 break;
 
             case 'song':
-            case 'mp3':
             case 'play':
-            case 'ytmp3':
-                if (!q) return sock.sendMessage(from, { text: `│ ❌ പാട്ടിന്റെ പേര് നൽകുക!\n│ Ex: ${handlerPrefix}song Aavesham` }, { quoted: msg });
-                
+            case 'mp3':
+                if (!q) return sock.sendMessage(from, { text: `❌ Please enter a song name!\nEx: ${handlerPrefix}song Believer` }, { quoted: msg });
                 const searchAudio = await yts(q);
-                if (!searchAudio.videos.length) return sock.sendMessage(from, { text: '│ ❌ പാട്ട് കണ്ടെത്താനായില്ല!' }, { quoted: msg });
+                if (!searchAudio.videos.length) return sock.sendMessage(from, { text: '❌ Song not found!' }, { quoted: msg });
                 
                 const audioInfo = searchAudio.videos[0];
-                await sock.sendMessage(from, { text: `│ 🎶 Downloading Audio: *${audioInfo.title}*\n│ 🤖 Bot: *${BOT_NAME}*` }, { quoted: msg });
+                await sock.sendMessage(from, { text: `🎶 Downloading Audio: *${audioInfo.title}*` }, { quoted: msg });
 
                 try {
                     const res = await axios.get(`https://api.vreden.my.id/api/ytmp3?url=${encodeURIComponent(audioInfo.url)}`);
                     const downloadUrl = res.data?.result?.download?.url;
-
                     if (downloadUrl) {
-                        await sock.sendMessage(from, { 
-                            audio: { url: downloadUrl }, 
-                            mimetype: 'audio/mpeg',
-                            ptt: false
-                        }, { quoted: msg });
-                    } else {
-                        throw new Error("API Download Failed");
-                    }
+                        await sock.sendMessage(from, { audio: { url: downloadUrl }, mimetype: 'audio/mpeg', ptt: false }, { quoted: msg });
+                    } else { throw new Error(); }
                 } catch (e) {
-                    const songFile = `./temp_audio_${Date.now()}.mp3`;
-                    const dlCmd = `yt-dlp -x --audio-format mp3 -o "${songFile}" "${audioInfo.url}"`;
-
-                    exec(dlCmd, async (err) => {
-                        if (!err && fs.existsSync(songFile)) {
-                            await sock.sendMessage(from, { 
-                                audio: fs.readFileSync(songFile), 
-                                mimetype: 'audio/mpeg', 
-                                fileName: `${audioInfo.title}.mp3`,
-                                ptt: false
-                            }, { quoted: msg });
-                            fs.unlinkSync(songFile);
-                        } else {
-                            await sock.sendMessage(from, { text: '│ ❌ ഓഡിയോ ഡൗൺലോഡ് ചെയ്യാൻ കഴിഞ്ഞില്ല!' }, { quoted: msg });
-                        }
-                    });
+                    await sock.sendMessage(from, { text: '❌ Download failed!' }, { quoted: msg });
                 }
                 break;
 
             case 'video':
             case 'yt':
             case 'ytmp4':
-                if (!q) return sock.sendMessage(from, { text: '│ ❌ വീഡിയോയുടെ പേര് നൽകുക!' }, { quoted: msg });
-                
+                if (!q) return sock.sendMessage(from, { text: '❌ Please enter video name!' }, { quoted: msg });
                 const searchVid = await yts(q);
-                if (!searchVid.videos.length) return sock.sendMessage(from, { text: '│ ❌ വീഡിയോ കണ്ടെത്താനായില്ല!' }, { quoted: msg });
+                if (!searchVid.videos.length) return sock.sendMessage(from, { text: '❌ Video not found!' }, { quoted: msg });
                 
                 const vid = searchVid.videos[0];
-                await sock.sendMessage(from, { text: `│ 🎥 Downloading: *${vid.title}*` }, { quoted: msg });
+                await sock.sendMessage(from, { text: `🎥 Downloading: *${vid.title}*` }, { quoted: msg });
                 
                 const vidFile = `./temp_vid_${Date.now()}.mp4`;
                 const vidCmd = `yt-dlp -o "${vidFile}" -f "b[ext=mp4]/b" "${vid.url}"`;
 
                 exec(vidCmd, async (err) => {
-                    if (err || !fs.existsSync(vidFile)) {
-                        return sock.sendMessage(from, { text: '│ ❌ വീഡിയോ ഡൗൺലോഡ് പരാജയപ്പെട്ടു!' }, { quoted: msg });
-                    }
-
-                    await sock.sendMessage(from, { 
-                        video: fs.readFileSync(vidFile), 
-                        caption: `│ 🎥 *${vid.title}*\n│ Bot: *${BOT_NAME}*` 
-                    }, { quoted: msg });
-                    
+                    if (err || !fs.existsSync(vidFile)) return sock.sendMessage(from, { text: '❌ Video download failed!' }, { quoted: msg });
+                    await sock.sendMessage(from, { video: fs.readFileSync(vidFile), caption: `🎥 *${vid.title}*\nBot: *${BOT_NAME}*` }, { quoted: msg });
                     if (fs.existsSync(vidFile)) fs.unlinkSync(vidFile);
                 });
                 break;
 
             case 'tts':
-                if (!q) return sock.sendMessage(from, { text: '│ ❌ ടെക്സ്റ്റ് നൽകുക!' }, { quoted: msg });
+                if (!q) return sock.sendMessage(from, { text: '❌ Enter text!' }, { quoted: msg });
                 try {
-                    const isMalayalam = /[\u0D00-\u0D7F]/.test(q);
-                    const lang = isMalayalam ? 'ml' : 'en';
-                    const audioUrl = googleTTS.getAudioUrl(q, { lang: lang, slow: false, host: 'https://translate.google.com' });
-                    
-                    await sock.sendMessage(from, { 
-                        audio: { url: audioUrl }, 
-                        mimetype: 'audio/mpeg', 
-                        ptt: false
-                    }, { quoted: msg });
+                    const audioUrl = googleTTS.getAudioUrl(q, { lang: 'en', slow: false, host: 'https://translate.google.com' });
+                    await sock.sendMessage(from, { audio: { url: audioUrl }, mimetype: 'audio/mpeg', ptt: false }, { quoted: msg });
                 } catch (e) {
-                    await sock.sendMessage(from, { text: '│ ❌ വോയ്‌സ് ഉണ്ടാക്കാൻ പറ്റിയില്ല!' }, { quoted: msg });
+                    await sock.sendMessage(from, { text: '❌ Voice generation failed!' }, { quoted: msg });
                 }
                 break;
 
             case 'tagall':
-            case 'tag':
-                if (!isGroup) return sock.sendMessage(from, { text: '│ ❌ ഗ്രൂപ്പിൽ മാത്രം ഉപയോഗിക്കുക!' }, { quoted: msg });
+            case 'hidetag':
+                if (!isGroup) return sock.sendMessage(from, { text: '❌ Group command only!' }, { quoted: msg });
                 const groupMetadata = await sock.groupMetadata(from);
-                let mentionsText = `┌───〔 📢 *ATTENTION EVERYONE* 〕\n│\n`;
-                let mentionsArr = [];
-                for (let mem of groupMetadata.participants) {
-                    mentionsText += `│ 👤 @${mem.id.split('@')[0]}\n`;
-                    mentionsArr.push(mem.id);
+                let mentionsText = cmd === 'tagall' ? `📢 *ATTENTION EVERYONE*\n\n` : (q || '📢 *Notification*');
+                let mentionsArr = groupMetadata.participants.map(m => m.id);
+                
+                if (cmd === 'tagall') {
+                    for (let mem of groupMetadata.participants) mentionsText += `👤 @${mem.id.split('@')[0]}\n`;
                 }
-                mentionsText += `│\n└───〔 *${BOT_NAME}* 〕`;
                 await sock.sendMessage(from, { text: mentionsText, mentions: mentionsArr });
                 break;
 
-            case 'sticker':
-            case 's':
-                const quotedMediaForSticker = msg.message.extendedTextMessage?.contextInfo?.quotedMessage;
-                const targetMsg = quotedMediaForSticker || msg.message;
-                if (!targetMsg.imageMessage) return sock.sendMessage(from, { text: '│ ❌ ഫോട്ടോയ്ക്ക് റിപ്ലൈയായി .sticker എന്ന് അയക്കുക!' }, { quoted: msg });
+            case 'gpt':
+            case 'gemini':
+            case 'ai':
+                if (!q) return sock.sendMessage(from, { text: '❌ Ask a question!\nEx: .gpt What is AI?' }, { quoted: msg });
+                try {
+                    const aiRes = await axios.get(`https://api.vreden.my.id/api/gpt?query=${encodeURIComponent(q)}`);
+                    const replyMsg = aiRes.data?.result || "No response received.";
+                    await sock.sendMessage(from, { text: replyMsg }, { quoted: msg });
+                } catch (e) {
+                    await sock.sendMessage(from, { text: '❌ AI server error!' }, { quoted: msg });
+                }
+                break;
 
-                const mediaStream = await downloadContentFromMessage(targetMsg.imageMessage, 'image');
-                let mediaBuffer = Buffer.from([]);
-                for await (const chunk of mediaStream) mediaBuffer = Buffer.concat([mediaBuffer, chunk]);
+            case 'joke':
+                try {
+                    const jokeRes = await axios.get('https://official-joke-api.appspot.com/random_joke');
+                    await sock.sendMessage(from, { text: `😂 *${jokeRes.data.setup}*\n\n🤣 ${jokeRes.data.punchline}` }, { quoted: msg });
+                } catch (e) {
+                    await sock.sendMessage(from, { text: '❌ Joke error!' }, { quoted: msg });
+                }
+                break;
 
-                await sock.sendMessage(from, { sticker: mediaBuffer }, { quoted: msg });
+            case 'quote':
+                try {
+                    const quoteRes = await axios.get('https://dummyjson.com/quotes/random');
+                    await sock.sendMessage(from, { text: `💬 "${quoteRes.data.quote}"\n\n— *${quoteRes.data.author}*` }, { quoted: msg });
+                } catch (e) {
+                    await sock.sendMessage(from, { text: '❌ Quote error!' }, { quoted: msg });
+                }
+                break;
+
+            case 'kick':
+            case 'ban':
+                if (!isGroup) return sock.sendMessage(from, { text: '❌ Group command only!' }, { quoted: msg });
+                const mentioned = msg.message.extendedTextMessage?.contextInfo?.mentionedJid?.[0];
+                if (!mentioned) return sock.sendMessage(from, { text: '❌ Please mention (@user) to kick!' }, { quoted: msg });
+                await sock.groupParticipantsUpdate(from, [mentioned], 'remove');
+                await sock.sendMessage(from, { text: `✅ Removed @${mentioned.split('@')[0]}`, mentions: [mentioned] }, { quoted: msg });
+                break;
+
+            case 'promote':
+                if (!isGroup) return sock.sendMessage(from, { text: '❌ Group command only!' }, { quoted: msg });
+                const userToPromote = msg.message.extendedTextMessage?.contextInfo?.mentionedJid?.[0];
+                if (!userToPromote) return sock.sendMessage(from, { text: '❌ Mention user to promote!' }, { quoted: msg });
+                await sock.groupParticipantsUpdate(from, [userToPromote], 'promote');
+                await sock.sendMessage(from, { text: `✅ Promoted @${userToPromote.split('@')[0]} to Admin!`, mentions: [userToPromote] }, { quoted: msg });
+                break;
+
+            case 'demote':
+                if (!isGroup) return sock.sendMessage(from, { text: '❌ Group command only!' }, { quoted: msg });
+                const userToDemote = msg.message.extendedTextMessage?.contextInfo?.mentionedJid?.[0];
+                if (!userToDemote) return sock.sendMessage(from, { text: '❌ Mention user to demote!' }, { quoted: msg });
+                await sock.groupParticipantsUpdate(from, [userToDemote], 'demote');
+                await sock.sendMessage(from, { text: `✅ Demoted @${userToDemote.split('@')[0]} from Admin!`, mentions: [userToDemote] }, { quoted: msg });
+                break;
+
+            case 'mode':
+                if (!isOwner) return sock.sendMessage(from, { text: '❌ Owner command only!' }, { quoted: msg });
+                if (q === 'public' || q === 'private') {
+                    botMode = q;
+                    await sock.sendMessage(from, { text: `✅ Bot mode changed to *${botMode}*` }, { quoted: msg });
+                } else {
+                    await sock.sendMessage(from, { text: `❌ Use: ${handlerPrefix}mode public OR ${handlerPrefix}mode private` }, { quoted: msg });
+                }
+                break;
+
+            case 'jid':
+                await sock.sendMessage(from, { text: `📍 *JID:* \`${from}\`` }, { quoted: msg });
+                break;
+
+            case 'git':
+            case 'github':
+            case 'sc':
+            case 'repo':
+                await sock.sendMessage(from, { text: `💻 *GitHub Repo:* https://github.com/axfeey/INATO-MD` }, { quoted: msg });
                 break;
         }
     });
