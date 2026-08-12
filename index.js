@@ -18,7 +18,7 @@ let botMode = "public";
 let handlerPrefix = ".";
 let sock;
 
-// Web Express Server Setup for Web Pairing
+// Web Express Server Setup with Modern Black & White Theme
 const app = express();
 const PORT = process.env.PORT || 3000;
 
@@ -29,25 +29,35 @@ app.get('/', (req, res) => {
     res.send(`
         <html>
             <head>
-                <title>${BOT_NAME} Pairing Portal</title>
+                <title>${BOT_NAME} | PAIRING PORTAL</title>
                 <meta name="viewport" content="width=device-width, initial-scale=1.0">
                 <style>
-                    body { font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif; background-color: #121212; color: #ffffff; text-align: center; padding: 40px 10px; }
-                    .card { background-color: #1e1e1e; max-width: 400px; margin: 0 auto; padding: 25px; border-radius: 12px; box-shadow: 0 4px 15px rgba(0,0,0,0.5); }
-                    h2 { color: #25D366; }
-                    input { width: 90%; padding: 12px; margin: 15px 0; border: 1px solid #333; border-radius: 6px; background: #2a2a2a; color: #fff; font-size: 16px; text-align: center; }
-                    button { width: 95%; padding: 12px; background-color: #25D366; color: white; border: none; border-radius: 6px; font-size: 16px; font-weight: bold; cursor: pointer; }
-                    button:hover { background-color: #1ebd56; }
+                    * { margin: 0; padding: 0; box-sizing: border-box; font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif; }
+                    body { background-color: #0d0d0d; color: #ffffff; display: flex; justify-content: center; align-items: center; min-height: 100vh; padding: 20px; }
+                    .container { background: #171717; border: 1px solid #2a2a2a; border-radius: 16px; padding: 40px 30px; width: 100%; max-width: 400px; text-align: center; box-shadow: 0 20px 40px rgba(0,0,0,0.8); }
+                    .logo-box { display: inline-block; background: #ffffff; color: #000000; font-weight: 900; font-size: 22px; padding: 10px 20px; border-radius: 8px; letter-spacing: 3px; margin-bottom: 20px; text-transform: uppercase; }
+                    h2 { font-size: 14px; font-weight: 500; color: #a0a0a0; margin-bottom: 25px; letter-spacing: 1px; }
+                    .input-group { margin-bottom: 20px; text-align: left; }
+                    label { font-size: 11px; color: #888888; text-transform: uppercase; letter-spacing: 1px; display: block; margin-bottom: 8px; font-weight: 600; }
+                    input { width: 100%; padding: 14px 16px; background: #0d0d0d; border: 1px solid #333333; border-radius: 8px; color: #ffffff; font-size: 16px; outline: none; text-align: center; letter-spacing: 1px; transition: 0.3s; }
+                    input:focus { border-color: #ffffff; }
+                    button { width: 100%; padding: 14px; background: #ffffff; color: #000000; border: none; border-radius: 8px; font-size: 15px; font-weight: 700; cursor: pointer; letter-spacing: 1px; text-transform: uppercase; margin-top: 10px; transition: 0.3s; }
+                    button:hover { background: #e0e0e0; transform: translateY(-1px); }
+                    .footer { margin-top: 30px; font-size: 12px; color: #555555; }
                 </style>
             </head>
             <body>
-                <div class="card">
-                    <h2>🤖 ${BOT_NAME}</h2>
-                    <p>Enter your WhatsApp Number with Country Code:</p>
+                <div class="container">
+                    <div class="logo-box">${BOT_NAME}</div>
+                    <h2>PAIRING PORTAL</h2>
                     <form action="/pair" method="get">
-                        <input type="text" name="phone" placeholder="e.g. 916282144167" required><br>
+                        <div class="input-group">
+                            <label>WhatsApp Number</label>
+                            <input type="text" name="phone" placeholder="916282144167" required>
+                        </div>
                         <button type="submit">Get Pairing Code</button>
                     </form>
+                    <div class="footer">Powered by ${OWNER_NAME}</div>
                 </div>
             </body>
         </html>
@@ -60,37 +70,55 @@ app.get('/pair', async (req, res) => {
 
     phone = phone.replace(/[^0-9]/g, '');
 
+    if (phone.length < 10) {
+        return res.send(`
+            <body style="background:#0d0d0d; color:white; text-align:center; padding:50px; font-family:sans-serif;">
+                <h3 style="color:#ff4d4d;">Invalid Phone Number! Include country code (e.g. 916282144167)</h3>
+                <br><a href="/" style="color:#ffffff;">Go Back</a>
+            </body>
+        `);
+    }
+
     try {
         if (!sock) {
-            return res.send(`<h3>Bot is starting up... Please refresh in a few seconds.</h3>`);
+            await connectToWhatsApp();
+            await new Promise(resolve => setTimeout(resolve, 3000));
         }
-        
+
         const code = await sock.requestPairingCode(phone);
         res.send(`
             <html>
                 <head>
-                    <title>${BOT_NAME} Pairing Code</title>
+                    <title>${BOT_NAME} | CODE</title>
                     <meta name="viewport" content="width=device-width, initial-scale=1.0">
                     <style>
-                        body { font-family: sans-serif; background: #121212; color: white; text-align: center; padding: 50px 10px; }
-                        .code-box { background: #1e1e1e; display: inline-block; padding: 20px 40px; border-radius: 10px; border: 2px solid #25D366; }
-                        h1 { color: #25D366; font-size: 38px; letter-spacing: 4px; margin: 10px 0; }
+                        * { margin: 0; padding: 0; box-sizing: border-box; font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif; }
+                        body { background-color: #0d0d0d; color: #ffffff; display: flex; justify-content: center; align-items: center; min-height: 100vh; padding: 20px; }
+                        .container { background: #171717; border: 1px solid #2a2a2a; border-radius: 16px; padding: 40px 30px; width: 100%; max-width: 400px; text-align: center; box-shadow: 0 20px 40px rgba(0,0,0,0.8); }
+                        .logo-box { display: inline-block; background: #ffffff; color: #000000; font-weight: 900; font-size: 20px; padding: 8px 16px; border-radius: 8px; letter-spacing: 2px; margin-bottom: 25px; }
+                        .code-title { font-size: 13px; color: #888888; text-transform: uppercase; letter-spacing: 1px; margin-bottom: 15px; }
+                        .code-display { font-size: 34px; font-weight: 800; color: #ffffff; background: #0d0d0d; border: 1px dashed #ffffff; padding: 20px; border-radius: 10px; letter-spacing: 6px; margin-bottom: 20px; }
+                        p { font-size: 13px; color: #aaaaaa; line-height: 1.5; }
                     </style>
                 </head>
                 <body>
-                    <div class="code-box">
-                        <p>Your Pairing Code for <b>${phone}</b>:</p>
-                        <h1>${code}</h1>
+                    <div class="container">
+                        <div class="logo-box">${BOT_NAME}</div>
+                        <div class="code-title">Your Pairing Code</div>
+                        <div class="code-display">${code}</div>
                         <p>Open WhatsApp > Linked Devices > Link with Phone Number</p>
                     </div>
                 </body>
             </html>
         `);
     } catch (err) {
-        res.send(`<body style="background:#121212; color:white; text-align:center; padding:50px;">
-            <h3 style="color:red;">Error requesting code. Make sure phone number is correct!</h3>
-            <a href="/" style="color:#25D366;">Go Back</a>
-        </body>`);
+        console.error("Pairing Error:", err);
+        res.send(`
+            <body style="background:#0d0d0d; color:white; text-align:center; padding:50px; font-family:sans-serif;">
+                <h3 style="color:#ff4d4d;">Error requesting code. Try again in 5 seconds!</h3>
+                <br><a href="/" style="color:#ffffff;">Go Back</a>
+            </body>
+        `);
     }
 });
 
